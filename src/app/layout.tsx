@@ -1,72 +1,81 @@
-import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Inter, Poppins } from 'next/font/google'
+import './globals.css'
+import { Gloria_Hallelujah } from 'next/font/google'
 
+const gloria = Gloria_Hallelujah({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-gloria',
+})
 const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
 
 const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-poppins",
-  display: "swap",
-});
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: "Squads - The New Way to Win Money on Sports",
+  title: 'Squads - The New Way to Win Money on Sports',
   description:
-    "Just pick More or Less on player stats and win up to 100X your cash! The simplest way to make money from sports betting.",
+    'Just pick More or Less on player stats and win up to 100X your cash! The simplest way to make money from sports betting.',
   keywords:
-    "sports betting, fantasy sports, win money, player stats, football betting",
-  authors: [{ name: "Squads Team" }],
-  creator: "Squads",
-  publisher: "Squads",
-  robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#00FF7F",
+    'sports betting, fantasy sports, win money, player stats, football betting',
+  authors: [{ name: 'Squads Team' }],
+  creator: 'Squads',
+  publisher: 'Squads',
+  robots: 'index, follow',
+  viewport: 'width=device-width, initial-scale=1',
+  themeColor: '#00FF7F',
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://squads.game",
-    title: "Squads - The New Way to Win Money on Sports",
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://squads.game',
+    title: 'Squads - The New Way to Win Money on Sports',
     description:
-      "Just pick More or Less on player stats and win up to 100X your cash!",
-    siteName: "Squads",
+      'Just pick More or Less on player stats and win up to 100X your cash!',
+    siteName: 'Squads',
     images: [
       {
-        url: "/og-image.png",
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: "Squads - Win Money on Sports",
+        alt: 'Squads - Win Money on Sports',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Squads - The New Way to Win Money on Sports",
+    card: 'summary_large_image',
+    title: 'Squads - The New Way to Win Money on Sports',
     description:
-      "Just pick More or Less on player stats and win up to 100X your cash!",
-    images: ["/og-image.png"],
-    creator: "@squads",
+      'Just pick More or Less on player stats and win up to 100X your cash!',
+    images: ['/og-image.png'],
+    creator: '@squads',
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
   },
-  manifest: "/site.webmanifest",
-};
+  manifest: '/site.webmanifest',
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${poppins.variable} ${gloria.variable}`}
+    >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -75,7 +84,9 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} bg-dark-navy antialiased`}>
+        {children}
+      </body>
     </html>
-  );
+  )
 }
