@@ -9,7 +9,7 @@ export function HeroSection() {
   return (
     <section className="relative min-h-[90vh] overflow-hidden">
       {/* Background Elements */}
-      {/* <FloatingElements /> */}
+      <FloatingElements />
 
       {/* Main Content */}
       <div className="relative z-10 flex min-h-[90vh] items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -19,7 +19,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-8"
+            className="mb-16"
           >
             <div className="relative rotate-[6deg] md:rotate-[4deg]">
               <motion.div
@@ -52,7 +52,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mb-12"
+            className="mb-12 max-w-md mx-auto"
           >
             <span className="text-xl md:text-2xl text-gray-300 ">
               Just pick <span className="font-bold">More</span> or &nbsp;
@@ -74,15 +74,14 @@ export function HeroSection() {
               size="lg"
               className="bg-light-green font-bold px-8 py-4 rounded-md text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
             >
-              Wanna play? Tap in 💸
-              {/* <Image
-                src="/assets/cash.svg"
-                alt="Play"
+              Wanna play? Tap in
+              <Image
+                src="/assets/cash.png"
+                alt="Play cash"
                 width={20}
                 height={20}
-                priority
-                className="h-5 w-5"
-              /> */}
+                className="ml-2"
+              />
             </Button>
           </motion.div>
         </div>

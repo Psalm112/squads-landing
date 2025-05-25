@@ -407,7 +407,7 @@ export function FeaturesSection() {
                           <path
                             d="M35.9774 1.46289C26.8388 7.43816 9.41035 37.2747 24.7299 57.7007C52.1458 94.2552 16.5284 103.277 2.9375 110.775M2.9375 110.775L7.85693 99.176M2.9375 110.775L16.2926 114.29"
                             stroke="#88C80C"
-                            stroke-width="3.51486"
+                            strokeWidth="3.51486"
                           />
                         </svg>
                       </div>
@@ -460,7 +460,7 @@ export function FeaturesSection() {
                       <path
                         d="M188.233 84.8366C83.3599 59.6039 15.4684 74.4691 32.7633 102.73C43.7124 120.621 91.6394 84.5661 39.6628 48.5943C3.6012 23.6369 15.7444 -4.01267 15.7444 3.17483M15.7444 3.17483L26.7837 16.9387M15.7444 3.17483L1.94531 21.9851"
                         stroke="#88C80C"
-                        stroke-width="3.51486"
+                        strokeWidth="3.51486"
                       />
                     </svg>
                     <span className="translate-x-[20%] font-cursive font-bold text-2xl text-center text-dark-navy inline-block">
