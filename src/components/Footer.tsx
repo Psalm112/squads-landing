@@ -1,39 +1,39 @@
-"use client";
+'use client'
 
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 const categories = [
   {
-    title: "DRIBBLE",
-    icon: "⚽",
-    color: "squad-pink",
+    title: 'DRIBBLE',
+    icon: '⚽',
+    color: 'pink',
   },
   {
-    title: "SHOTS",
-    icon: "🥅",
-    color: "squad-green",
+    title: 'SHOTS',
+    icon: '🥅',
+    color: 'green',
   },
   {
-    title: "GOALIE SAVES",
-    icon: "🧤",
-    color: "squad-blue",
+    title: 'GOALIE SAVES',
+    icon: '🧤',
+    color: 'blue',
   },
   {
-    title: "TACKLES",
-    icon: "⚡",
-    color: "squad-yellow",
+    title: 'TACKLES',
+    icon: '⚡',
+    color: 'yellow',
   },
   {
-    title: "FOULS",
-    icon: "⚠️",
-    color: "squad-orange",
+    title: 'FOULS',
+    icon: '⚠️',
+    color: 'orange',
   },
   {
-    title: "GOALS",
-    icon: "🎯",
-    color: "squad-purple",
+    title: 'GOALS',
+    icon: '🎯',
+    color: 'purple',
   },
-];
+]
 
 export function Footer() {
   return (
@@ -77,5 +77,5 @@ export function Footer() {
         </motion.div>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export interface NavigationItem {
   name: string
   href: string
@@ -23,7 +25,19 @@ export interface BettingCard {
   multiplier: string
 }
 
-export interface PlayerCard {
+// export interface PlayerCard {
+//   id: number
+//   name: string
+//   team: string
+//   position: string
+//   match: string
+//   date: string
+//   stat: string
+//   value: string
+//   avatar: string
+// }
+
+export interface PlayerCardData {
   id: number
   name: string
   team: string
@@ -34,9 +48,25 @@ export interface PlayerCard {
   value: string
   avatar: string
 }
+export interface PlayerCardProps {
+  player: PlayerCardData
+  index: number
+  variants: any
+  isStandalone?: boolean
+}
 
 export interface IconFeature {
-  icon: string
+  icon: ReactNode
   bgColor: string
-  borderColor: string
+  shape: 'square' | 'circle'
+}
+
+export interface AnimatedArrowProps {
+  className?: string
+  pathData: string
+  width: string | number
+  height: string | number
+  viewBox: string
+  isInView: boolean
+  delay?: number
 }

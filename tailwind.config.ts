@@ -19,34 +19,15 @@ export default {
         cream: '#FBFFF4',
 
         'squad-green': '#7ED321',
-        'squad-pink': '#D63384',
-        'squad-blue': '#4ECDC4',
-        'squad-yellow': '#F7CA18',
-        'squad-purple': '#9013FE',
-        'squad-orange': '#FF6B35',
 
-        // Background colors
-        'dark-blue': '#34495E',
-        'light-cream': '#F8F9FA',
         'card-dark': '#262f3b',
 
         // Semantic colors
-        primary: {
-          50: '#E8F5E8',
-          100: '#C3E6C3',
-          500: '#7ED321',
-          600: '#6BB01E',
-          700: '#5A9D1A',
-        },
-        secondary: {
-          50: '#FDE8F1',
-          500: '#D63384',
-          600: '#C02A74',
-        },
       },
       screens: {
         xs: '480px',
         xxs: '380px',
+        '3xs': '320px',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -72,6 +53,7 @@ export default {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in': 'fadeIn 0.6s ease-out',
         'slide-up': 'slideUp 0.8s ease-out',
+        marquee: 'marquee 20s linear infinite',
       },
       keyframes: {
         float: {
@@ -87,11 +69,23 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(60px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       backdropBlur: {
         xs: '2px',
       },
+      clipPath: {
+        'bottom-slant': 'polygon(0 0, 100% 0, 100% 85%, 0% 100%)',
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('tailwind-clip-path'),
+  ],
 } satisfies Config

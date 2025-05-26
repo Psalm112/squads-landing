@@ -1,8 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap'); */
 
+.slant-bottom-left::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 20px;
+  background: inherit;
+  transform: skewX(-20deg);
+  transform-origin: bottom left;
+  z-index: 10;
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
