@@ -1,5 +1,4 @@
 import { SVGProps } from 'react'
-import { motion } from 'framer-motion'
 
 export function Goal(props: SVGProps<SVGSVGElement>) {
   return (

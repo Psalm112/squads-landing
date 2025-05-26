@@ -10,6 +10,8 @@ export default function AnimatedArrow({
   height,
   viewBox,
   isInView,
+  stroke = '#88C80C',
+  strokeWidth = '3.51486',
   delay = 1,
 }: AnimatedArrowProps) {
   return (
@@ -32,8 +34,8 @@ export default function AnimatedArrow({
     >
       <motion.path
         d={pathData}
-        stroke="#88C80C"
-        strokeWidth="3.51486"
+        stroke={stroke}
+        strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
         initial={{ pathLength: 0 }}

@@ -22,8 +22,6 @@ export default {
         'squad-green': '#7ED321',
 
         'card-dark': '#262f3b',
-
-        // Semantic colors
       },
       screens: {
         xs: '480px',
@@ -78,15 +76,8 @@ export default {
       backdropBlur: {
         xs: '2px',
       },
-      clipPath: {
-        'bottom-slant': 'polygon(0 0, 100% 0, 100% 85%, 0% 100%)',
-      },
     },
   },
 
-  plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    require('tailwind-clip-path'),
-  ],
+  plugins: [require('@tailwindcss/typography')],
 } satisfies Config

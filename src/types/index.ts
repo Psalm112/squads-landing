@@ -68,5 +68,7 @@ export interface AnimatedArrowProps {
   height: string | number
   viewBox: string
   isInView: boolean
+  strokeWidth?: string
+  stroke?: string
   delay?: number
 }

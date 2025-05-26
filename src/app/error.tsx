@@ -1,11 +1,10 @@
-"use client";
+'use client'
 
 export default function Error({
-  error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
   return (
     <div className="min-h-screen flex items-center justify-center bg-dark-navy">
@@ -21,5 +20,5 @@ export default function Error({
         </button>
       </div>
     </div>
-  );
+  )
 }

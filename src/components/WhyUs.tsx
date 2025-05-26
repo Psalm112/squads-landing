@@ -18,6 +18,7 @@ interface FeatureCard {
     rotate: string
   }
   icon: string
+  decorativeElement?: React.ReactNode
 }
 
 const features: FeatureCard[] = [
@@ -27,8 +28,19 @@ const features: FeatureCard[] = [
       text: 'Numerous Options',
       color: 'text-[#D0F091]',
     },
-    description:
-      "Bet Your Way with Endless Options! No matter your game, we've got the odds, the excitement, and the options just for you! 🎯",
+    description: (
+      <span>
+        Bet Your Way with Endless Options! No matter your game, we&apos;ve got
+        the odds, the excitement, and the options just for you!&nbsp;
+        <Image
+          src="/assets/greenHeart.svg"
+          alt="love numerous options"
+          width={16}
+          height={16}
+          className="inline"
+        />
+      </span>
+    ),
     icon: '/assets/numerousOpp.svg',
     cardStyle: {
       bgColor: 'bg-gradient-to-b from-[#232D39] to-[#000000]',
@@ -78,7 +90,7 @@ const features: FeatureCard[] = [
       color: 'text-dark-navy',
     },
     description:
-      'No dey hide updates!!! Invite your friends and family to join squads and get paid ₦1000 when they use your referral link',
+      'No dey hide updates!!! Invite your friends and family to join squads and get paid ₦1000 when they use your referral link🤑',
     icon: '/assets/bonusesRewards.svg',
     cardStyle: {
       bgColor: 'bg-gradient-to-b from-[#FFC2F7] to-[#FFFBFD]',
@@ -167,7 +179,7 @@ function WhyUs() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-50px' }}
-        className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 max-md:gap-y-[20px] px-12"
+        className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 max-md:gap-y-[20px] px-12 mt-[130px]"
       >
         {features.map((feature, index) => (
           <div

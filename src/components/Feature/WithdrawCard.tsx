@@ -34,7 +34,7 @@ export default function WithdrawCard({
         </div>
         <div className="text-center space-y-2 sm:space-y-4">
           <p className="text-sm sm:text-base text-gray-600">
-            You bad, no worry 😅🔥
+            You bad, no worry 😭🔥
           </p>
           <p className="text-xs sm:text-sm text-dark-green font-semibold">
             You won
