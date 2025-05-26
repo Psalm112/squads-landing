@@ -1,4 +1,7 @@
-import React from 'react'
+'use client'
+
+import React, { useMemo } from 'react'
+import { motion } from 'framer-motion'
 import { Boot, Dribble, Foul, Glove, Shot } from './icons'
 
 const bannerItems = [
@@ -11,22 +14,37 @@ const bannerItems = [
 ]
 
 const Banner = () => {
+  const duplicatedItems = useMemo(() => [...bannerItems, ...bannerItems], [])
+
   return (
     <div className="relative w-[105vw] translate-x-[-2.5vw]">
-      <div className="rotate-[3deg] bg-dark-green py-2">
-        <div className="animate-marquee whitespace-nowrap flex gap-4 px-4">
-          {[...Array(2)].flatMap((_, idx) =>
-            bannerItems.map((item, i) => (
-              <div
-                key={`${item.title}-${idx}-${i}`}
-                className="flex items-center gap-4 text-dark-navy font-black text-xl uppercase"
-              >
-                {item.title}
-                <span>{item.icon}</span>
-              </div>
-            ))
-          )}
-        </div>
+      <div className="rotate-[2.5deg] bg-dark-green py-2">
+        <motion.div
+          className="flex gap-4 px-4 whitespace-nowrap will-change-transform"
+          animate={{
+            x: ['0%', '-50%'],
+          }}
+          transition={{
+            x: {
+              repeat: Infinity,
+              repeatType: 'loop',
+              duration: 25,
+              ease: 'linear',
+            },
+          }}
+        >
+          {duplicatedItems.map((item, index) => (
+            <div
+              key={`${item.title}-${index}`}
+              className="flex items-center gap-4 text-dark-navy font-black text-xl uppercase flex-shrink-0"
+            >
+              <span>{item.title}</span>
+              <span className="flex-shrink-0" aria-hidden="true">
+                {item.icon}
+              </span>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </div>
   )

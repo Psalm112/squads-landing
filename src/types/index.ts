@@ -38,7 +38,7 @@ export interface BettingCard {
 // }
 
 export interface PlayerCardData {
-  id: number
+  id: number | string
   name: string
   team: string
   position: string

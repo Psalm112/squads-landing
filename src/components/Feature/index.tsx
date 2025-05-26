@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Goal, Glove, Boot, Target } from '../icons'
-import PlayerCard from './PlayerCard'
+import PlayerCard from '../ui/PlayerCard'
 import WithdrawCard from './WithdrawCard'
 import AnimatedArrow from './AnimatedArrow'
 import { IconFeature, PlayerCardData } from '@/types'
@@ -154,7 +154,7 @@ export default function Features() {
             ? isTiny
               ? 'polygon(0 0, 100% 0, 100% 100%, 0% 98%)'
               : 'polygon(0 0, 100% 0, 100% 100%, 0% 97%)'
-            : 'polygon(0 0, 100% 0, 100% 100%, 0% 96%)',
+            : 'polygon(0 0, 100% 0, 100% 100%, 0% 96.5%)',
         }}
       >
         <div className="max-w-7xl mx-auto h-full">
