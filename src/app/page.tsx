@@ -2,12 +2,14 @@
 
 import { Header } from '@/components/Header'
 import { HeroSection } from '@/components/HeroSection'
-// import { Footer } from '@/components/Footer'
+import { Footer } from '@/components/Footer'
 import { motion } from 'framer-motion'
 import Features from '@/components/Feature'
 import Players from '@/components/Players'
 import WhyUs from '@/components/WhyUs'
 import Testimonials from '@/components/Testimonials'
+import Blog from '@/components/Blog'
+
 export default function HomePage() {
   return (
     <motion.div
@@ -19,10 +21,9 @@ export default function HomePage() {
       <Header />
       <main>
         <div className="bg-[url('/assets/bg1.png')] bg-cover">
-          {/* <div> */}
           <HeroSection />
 
-          <div className="relative flex rotate-[180deg] h-[60px] xs:h-[80px]">
+          <div className="relative flex rotate-[180deg] h-[60px] xs:h-[80px] translate-y-[3.8px] ">
             {Array(
               window.innerWidth > 1280
                 ? 5
@@ -41,11 +42,18 @@ export default function HomePage() {
                   xmlns="http://www.w3.org/2000/svg"
                   preserveAspectRatio="none"
                   viewBox="0 0 1000 100"
+                  style={{
+                    border: 'none',
+                    stroke: 'none',
+                    boxShadow: 'none',
+                    filter: 'none',
+                  }}
                 >
                   <path
                     d="M500 4c-125 0-125 96-250 96S125 4 0 4V0h1000v4c-125 0-125 96-250 96S625 4 500 4Z"
                     fill="#FBFFF4"
-                  ></path>
+                    stroke="none"
+                  />
                 </svg>
               ))}
           </div>
@@ -95,6 +103,8 @@ export default function HomePage() {
           <Testimonials />
         </div>
       </main>
+      <Blog />
+      <Footer />
     </motion.div>
   )
 }

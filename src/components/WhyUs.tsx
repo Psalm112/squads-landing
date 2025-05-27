@@ -45,7 +45,7 @@ const features: FeatureCard[] = [
     cardStyle: {
       bgColor: 'bg-gradient-to-b from-[#232D39] to-[#000000]',
       textColor: 'text-[#FAFEFA]',
-      border: 'border-[#262F3B]',
+      border: 'border-card-dark',
       rotate: 'rotate-[5deg] md:-rotate-[5deg]',
     },
   },
@@ -61,7 +61,7 @@ const features: FeatureCard[] = [
     cardStyle: {
       bgColor: 'bg-gradient-to-br from-[#104333] to-[#28A981]',
       textColor: 'text-[#FAFEFA]',
-      border: 'border-[#262F3B]',
+      border: 'border-card-dark',
       rotate:
         '-rotate-[3deg] max-md:translate-x-[10%] md:rotate-[2deg] md:-translate-y-[10%]',
     },

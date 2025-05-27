@@ -1,23 +1,184 @@
+// src/components/Testimonials.tsx
 import React from 'react'
 import AnimatedArrow from '@/components/Feature/AnimatedArrow'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import {
+  TestimonialCard,
+  StatsCard,
+  LeaderboardCard,
+} from '@/components/TestimonialCard'
 
 function Testimonials() {
   const ref = useRef(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
   const isSmall = useMediaQuery('(max-width: 1024px)')
 
+  // Mock data - replace with real data
+  const testimonialData = {
+    leaderboard: {
+      title: 'First time playing on squad. First of many🤛🏼',
+      //   subtitle: '2024 (STANDARD)',
+      subtitle: '',
+      leaderboard: [
+        {
+          name: 'Christian Nørgaard',
+          avatar: '/assets/testimonials/christian.jpg',
+          attempts: 49,
+          score: 45,
+          status: 'online' as const,
+        },
+        {
+          name: 'Anthony Gordon',
+          avatar: '/assets/testimonials/anthony.jpg',
+          attempts: 33,
+          score: 24,
+          status: 'online' as const,
+        },
+        {
+          name: 'Axel Tuanzebe',
+          avatar: '/assets/testimonials/axel.jpg',
+          attempts: 0,
+          score: 0,
+          status: 'online' as const,
+        },
+      ],
+      author: {
+        name: 'Viktor Leo',
+        handle: '@ViktohLeo',
+        avatar: '/assets/testimonials/viktoh.png',
+      },
+    },
+    testimonials: [
+      {
+        content:
+          "Broooo i just noticed squads used the picture of GOAT for Lionel Messi in their platform and it's bursting my brain 😂",
+        author: {
+          name: 'Izu Official',
+          handle: '@Izu__Official',
+          avatar: '/assets/testimonials/izu2.png',
+        },
+      },
+      {
+        content: 'Stay humble haaland after 0:4 defeat against spurs 🤗#MUTTOT',
+        author: {
+          name: 'UTD Trey',
+          handle: '@UTDTrey',
+          avatar: '/assets/testimonials/trey.png',
+        },
+        image: '/assets/testimonials/haaland-sad.png',
+      },
+      {
+        content:
+          'Them say nah squad money dey now o. I don leave ********* for you nah🚀🔥',
+        author: {
+          name: 'Jujubol',
+          handle: '@Jujubol____',
+          avatar: '/assets/testimonials/juju.png',
+        },
+      },
+      {
+        content: '3 Ws in a row for my picks jhor,🔥 Weekend go soft again 😎',
+        author: {
+          name: 'Def Not Holmes',
+          handle: '@defnotholmes',
+          avatar: '/assets/testimonials/holmes.png',
+        },
+        image: '/assets/testimonials/money-celebration.png',
+      },
+      {
+        content:
+          '@SquadsDFS is real gee is here 😂😂😂😂😂 😂🔥🔥🔥🔥🔥🔥🔥🔥🔥',
+        author: {
+          name: 'Ayomide',
+          handle: '@Ayomide2986',
+          avatar: '/assets/testimonials/ayomide.png',
+        },
+      },
+      {
+        content: 'Vandals have just done make 2k from squad platform too',
+        author: {
+          name: 'Opodo',
+          handle: '@opodo',
+          avatar: '/assets/testimonials/opodo.png',
+        },
+      },
+      {
+        content:
+          'love this platform @Squad actually different from the people in our platform platform Implement so many big updates fr and',
+        author: {
+          name: 'Fadaik',
+          handle: '@Fadaik',
+          avatar: '/assets/testimonials/fadaik.png',
+        },
+      },
+    ],
+    stats: {
+      title: 'THE RUN IN',
+      description: "Remaining fixtures for the Premier League's top two...",
+      stats: {
+        team1: {
+          name: 'Liverpool',
+          logo: '/logos/liverpool.png',
+          position: '1st',
+          points: 73,
+        },
+        team2: {
+          name: 'Arsenal',
+          logo: '/logos/arsenal.png',
+          position: '2nd',
+          points: 62,
+        },
+      },
+      fixtures: [],
+      author: {
+        // name: 'Premier League',
+        name: '',
+        handle: '@premierleague',
+        avatar: '/assets/testimonials/pl.png',
+      },
+      hashtag: '#TheRunIn',
+      image: '/assets/testimonials/epl.png',
+    },
+  }
+
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.05,
+      },
+    },
+  }
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      x: 50,
+      scale: 0.95,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  }
+
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen py-20 overflow-hidden">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative text-white/90 text-center px-2 xxs:px-4 mt-auto"
+        className="relative text-white/90 text-center px-2 xxs:px-4 mb-16"
       >
         <h2 className="relative mx-auto w-[60%] xs:w-[40%] md:w-[60%] lg:w-fit text-2xl sm:text-3xl lg:text-5xl font-black leading-tight tracking-tight">
           <span className="relative w-fit">
@@ -45,10 +206,191 @@ function Testimonials() {
           </span>
         </h2>
       </motion.div>
-      <div className="flex flex-col gap-4 w-full items-center">
-        <div className="flex gap-4 items-center w-full"></div>
-        <div className="flex gap-4 items-center"></div>
-      </div>
+
+      {/* Horizontal Scrolling Container */}
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
+        className="relative"
+      >
+        {/* First Row */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 sm:gap-6 overflow-x-auto pt-2 pb-6 mb-8 px-4 sm:px-6 lg:px-8
+                     scrollbar-hide scroll-smooth
+                     [-webkit-overflow-scrolling:touch]
+                     [&::-webkit-scrollbar]:hidden
+                     [&::-webkit-scrollbar-track]:hidden
+                     [&::-webkit-scrollbar-thumb]:hidden
+                     [-ms-overflow-style:none]
+                     [scrollbar-width:none]"
+          style={{
+            maskImage:
+              'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',
+          }}
+        >
+          <motion.div variants={cardVariants} className="flex-shrink-0">
+            <LeaderboardCard
+              {...testimonialData.leaderboard}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div variants={cardVariants} className="flex-shrink-0">
+            <TestimonialCard
+              content={testimonialData.testimonials[0].content}
+              author={testimonialData.testimonials[0].author}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div variants={cardVariants} className="flex-shrink-0">
+            <TestimonialCard
+              content={testimonialData.testimonials[1].content}
+              author={testimonialData.testimonials[1].author}
+              image={testimonialData.testimonials[1].image}
+              variant="image"
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div variants={cardVariants} className="flex-shrink-0">
+            <TestimonialCard
+              content={testimonialData.testimonials[2].content}
+              author={testimonialData.testimonials[2].author}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div variants={cardVariants} className="flex-shrink-0">
+            <TestimonialCard
+              content={testimonialData.testimonials[5].content}
+              author={testimonialData.testimonials[5].author}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+        </div>
+
+        {/* Second Row */}
+        <div
+          className="flex gap-4 sm:gap-6 overflow-x-auto pt-2 pb-6 px-4 sm:px-6 lg:px-8
+                     scrollbar-hide scroll-smooth
+                     [-webkit-overflow-scrolling:touch]
+                     [&::-webkit-scrollbar]:hidden
+                     [&::-webkit-scrollbar-track]:hidden
+                     [&::-webkit-scrollbar-thumb]:hidden
+                     [-ms-overflow-style:none]
+                     [scrollbar-width:none]"
+          style={{
+            maskImage:
+              'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%)',
+          }}
+        >
+          <motion.div
+            variants={cardVariants}
+            className="flex-shrink-0"
+            transition={{ delay: 0.3 }}
+          >
+            <TestimonialCard
+              content={testimonialData.testimonials[3].content}
+              author={testimonialData.testimonials[3].author}
+              image={testimonialData.testimonials[3].image}
+              variant="image"
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={cardVariants}
+            className="flex-shrink-0"
+            transition={{ delay: 0.35 }}
+          >
+            <TestimonialCard
+              content={testimonialData.testimonials[4].content}
+              author={testimonialData.testimonials[4].author}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={cardVariants}
+            className="flex-shrink-0"
+            transition={{ delay: 0.4 }}
+          >
+            <StatsCard
+              {...testimonialData.stats}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={cardVariants}
+            className="flex-shrink-0"
+            transition={{ delay: 0.45 }}
+          >
+            <TestimonialCard
+              content="Broooo i just noticed squads used the picture of GOAT for Lionel Messi in their platform and it's bursting my brain 😂"
+              author={{
+                name: 'Izu Official',
+                handle: '@Izu__Official',
+                avatar: '/assets/testimonials/izu2.png',
+              }}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+
+          <motion.div
+            variants={cardVariants}
+            className="flex-shrink-0"
+            transition={{ delay: 0.5 }}
+          >
+            <TestimonialCard
+              content={testimonialData.testimonials[6].content}
+              author={testimonialData.testimonials[6].author}
+              className="w-[280px] sm:w-[320px] lg:w-[350px]"
+            />
+          </motion.div>
+        </div>
+
+        {/* Gradient Overlays for Visual Effect */}
+        <div className="absolute top-0 left-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-r from-dark-navy to-transparent pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-l from-dark-navy to-transparent pointer-events-none z-10" />
+      </motion.div>
+
+      {/* Scroll Hint for Mobile */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 1, duration: 0.6 }}
+        className="flex justify-center mt-8 lg:hidden"
+      >
+        <div className="flex items-center gap-2 text-slate-400 text-sm">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="animate-pulse"
+          >
+            <path
+              d="M8 12L12 8L16 12"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              transform="rotate(90 12 12)"
+            />
+          </svg>
+          <span>Swipe to see more</span>
+        </div>
+      </motion.div>
     </section>
   )
 }

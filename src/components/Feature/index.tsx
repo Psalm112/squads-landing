@@ -148,7 +148,7 @@ export default function Features() {
         </svg>
       </div>
       <section
-        className="bg-cream h-full min-h-screen pt-8 sm:pt-16 pb-[200px] lg:pb-[250px] px-4 sm:px-8 relative overflow-hidden"
+        className="bg-cream h-full min-h-screen border-none pt-8 sm:pt-16 pb-[200px] lg:pb-[250px] px-4 sm:px-8 relative overflow-hidden"
         style={{
           clipPath: isSmall
             ? isTiny

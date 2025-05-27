@@ -72,3 +72,17 @@ export interface AnimatedArrowProps {
   stroke?: string
   delay?: number
 }
+
+export interface TestimonialCardProps {
+  variant?: 'default' | 'image' | 'stats'
+  className?: string
+  content: string
+  author: {
+    name: string
+    handle: string
+    avatar: string
+  }
+  image?: string
+  hashtag?: string
+  delay?: number
+}
