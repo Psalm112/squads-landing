@@ -178,7 +178,7 @@ function Testimonials() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="relative text-white/90 text-center px-2 xxs:px-4 mb-16"
+        className="relative text-center px-2 xxs:px-4 mb-16"
       >
         <h2 className="relative mx-auto w-[60%] xs:w-[40%] md:w-[60%] lg:w-fit text-2xl sm:text-3xl lg:text-5xl font-black leading-tight tracking-tight">
           <span className="relative w-fit">

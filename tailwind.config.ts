@@ -18,6 +18,8 @@ export default {
         pink: '#FD89ED',
         'light-pink': '#FFC2F7',
         cream: '#FBFFF4',
+        'text-gray': '#797F86',
+        'text-primary': '#D2D4D7',
 
         'squad-green': '#7ED321',
 

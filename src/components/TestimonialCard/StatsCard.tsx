@@ -63,7 +63,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
       </div>
 
       {/* Description */}
-      <p className="text-white text-base leading-relaxed mb-4">{description}</p>
+      <p className="text-text-primary text-lg font-bold leading-relaxed mb-4">
+        {description}
+      </p>
 
       {/* Hashtag */}
       <span className="inline-block text-light-green font-semibold text-lg mb-6 hover:text-green-300 transition-colors">

@@ -50,9 +50,11 @@ export interface PlayerCardData {
 }
 export interface PlayerCardProps {
   player: PlayerCardData
-  index: number
   variants: any
   isStandalone?: boolean
+  highlightMore?: boolean
+  highlightLess?: boolean
+  highlightCard?: boolean
 }
 
 export interface IconFeature {

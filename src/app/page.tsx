@@ -9,7 +9,8 @@ import Players from '@/components/Players'
 import WhyUs from '@/components/WhyUs'
 import Testimonials from '@/components/Testimonials'
 import Blog from '@/components/Blog'
-
+import Community from '@/components/Community'
+import CallToAction from '@/components/CallToAction'
 export default function HomePage() {
   return (
     <motion.div
@@ -60,7 +61,7 @@ export default function HomePage() {
 
           <Features />
           <div className="h-[40vh] md:h-[60vh] px-8 flex items-center justify-center md:justify-start">
-            <div className="relative text-white/70 text-center md:text-left space-y-8 md:space-y-10 px-2 xxs:px-4 md:ml-[10vw]">
+            <div className="relative text-text-primary text-center md:text-left space-y-8 md:space-y-10 px-2 xxs:px-4 md:ml-[10vw]">
               <h2 className="md:w-[20vw] text-2xl sm:text-3xl lg:text-5xl font-black leading-tight">
                 NUMEROUS PLAYER&nbsp;
                 <span className="font-cursive text-light-green">
@@ -101,8 +102,10 @@ export default function HomePage() {
         >
           <WhyUs />
           <Testimonials />
+          <CallToAction />
         </div>
       </main>
+      <Community />
       <Blog />
       <Footer />
     </motion.div>

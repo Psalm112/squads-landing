@@ -99,7 +99,9 @@ const LeaderboardCard: React.FC<LeaderboardCardProps> = ({
                 />
               </div>
               <div>
-                <p className="text-white font-medium text-sm">{entry.name}</p>
+                <p className="text-text-primary font-medium text-sm">
+                  {entry.name}
+                </p>
                 <p className="text-slate-400 text-xs">
                   {entry.attempts} Passing Attempts
                 </p>
@@ -115,7 +117,7 @@ const LeaderboardCard: React.FC<LeaderboardCardProps> = ({
       </div>
 
       {/* Title */}
-      <h3 className="text-white text-lg font-bold mb-4 leading-tight">
+      <h3 className="text-text-primary text-lg font-bold mb-4 leading-tight">
         {title}
       </h3>
 

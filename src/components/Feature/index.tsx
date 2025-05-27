@@ -212,7 +212,11 @@ export default function Features() {
                       <PlayerCard
                         key={player.id}
                         player={player}
-                        index={index}
+                        highlightCard={
+                          index === 0 || index === 1 ? true : false
+                        }
+                        highlightMore={index === 0 ? true : false}
+                        highlightLess={index === 1 ? true : false}
                         variants={itemVariants}
                       />
                     ))}
@@ -244,13 +248,13 @@ export default function Features() {
                   <div className="flex flex-wrap gap-4 items-center justify-center -rotate-2">
                     <div className="text-center">
                       <p className="text-gray-600 mb-2">Entry Amount</p>
-                      <div className="bg-dark-navy text-white font-bold text-xl px-6 py-4 rounded-lg">
+                      <div className="bg-dark-navy text-text-primary font-bold text-xl px-6 py-4 rounded-lg">
                         ₦1,000
                       </div>
                     </div>
                     <div className="text-center">
                       <p className="text-gray-600 mb-2">Potential Payout</p>
-                      <div className="bg-dark-navy text-white font-bold text-xl px-6 py-4 rounded-lg">
+                      <div className="bg-dark-navy text-text-primary font-bold text-xl px-6 py-4 rounded-lg">
                         ₦3,000
                       </div>
                     </div>
@@ -310,7 +314,11 @@ export default function Features() {
                         <PlayerCard
                           key={player.id}
                           player={player}
-                          index={index}
+                          highlightCard={
+                            index === 0 || index === 1 ? true : false
+                          }
+                          highlightMore={index === 0 ? true : false}
+                          highlightLess={index === 1 ? true : false}
                           variants={itemVariants}
                         />
                       ))}
@@ -343,13 +351,13 @@ export default function Features() {
                     <div className="flex gap-4 items-center justify-end transform -rotate-2 -translate-x-[10%]">
                       <div className="text-center">
                         <p className="text-gray-600 mb-2">Entry Amount</p>
-                        <div className="bg-dark-navy text-white font-bold text-xl px-6 py-4 rounded-lg">
+                        <div className="bg-dark-navy text-text-primary font-bold text-xl px-6 py-4 rounded-lg">
                           ₦1,000
                         </div>
                       </div>
                       <div className="text-center">
                         <p className="text-gray-600 mb-2">Potential Payout</p>
-                        <div className="bg-dark-navy text-white font-bold text-xl px-6 py-4 rounded-lg">
+                        <div className="bg-dark-navy text-text-primary font-bold text-xl px-6 py-4 rounded-lg">
                           ₦3,000
                         </div>
                       </div>

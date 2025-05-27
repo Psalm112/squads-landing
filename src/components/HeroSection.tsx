@@ -99,7 +99,7 @@ export function HeroSection() {
           >
             <Button
               size="lg"
-              className="bg-light-green font-bold px-8 py-4 rounded-md text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
+              className="text-dark-navy bg-light-green hover:bg-light-green/80 font-bold px-8 py-4 rounded-md text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
             >
               Wanna play? Tap in
               <Image

@@ -84,7 +84,9 @@ export default function RootLayout({
           crossOrigin=""
         />
       </head>
-      <body className={`${inter.className} bg-dark-navy antialiased`}>
+      <body
+        className={`${inter.className} bg-dark-navy antialiased text-text-primary`}
+      >
         {children}
       </body>
     </html>

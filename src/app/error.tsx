@@ -9,7 +9,7 @@ export default function Error({
   return (
     <div className="min-h-screen flex items-center justify-center bg-dark-navy">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-white mb-4">
+        <h2 className="text-2xl font-bold text-text-primary mb-4">
           Something went wrong!
         </h2>
         <button

@@ -21,7 +21,7 @@ export default function WithdrawCard({
       <motion.div
         whileHover={{ y: -6, rotate: -9 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-md p-2 xxs:p-4 sm:p-6 border border-dark-navy"
+        className="bg-white rounded-md p-2 xxs:p-4 sm:p-6 shadow-lg border border-dark-navy"
       >
         <div className="rounded-md mb-4 w-fit sm:mb-6 relative overflow-hidden">
           <Image

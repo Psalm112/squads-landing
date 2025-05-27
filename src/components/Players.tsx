@@ -59,7 +59,8 @@ const InfiniteScrollRow: React.FC<{
   direction: 'left' | 'right'
   speed: number
   rowIndex: number
-}> = ({ players, direction, speed, rowIndex }) => {
+  highlightIndex?: number[]
+}> = ({ players, direction, speed, rowIndex, highlightIndex }) => {
   // Duplicate players for seamless infinite scroll
   const duplicatedPlayers = useMemo(() => [...players, ...players], [players])
 
@@ -103,9 +104,11 @@ const InfiniteScrollRow: React.FC<{
           <div key={`${player.id}-${index}`} className="flex-shrink-0">
             <PlayerCard
               player={player}
-              index={index}
               variants={cardVariants}
               isStandalone={false}
+              highlightCard={
+                highlightIndex && highlightIndex.includes(index) ? true : false
+              }
             />
           </div>
         ))}
@@ -175,8 +178,12 @@ const Players: React.FC = () => {
               <InfiniteScrollRow
                 players={players}
                 direction={rowIndex % 2 === 0 ? 'left' : 'right'}
-                speed={30 + rowIndex * 5} // Varying speeds for visual interest
+                speed={30 + rowIndex * 5}
                 rowIndex={rowIndex}
+                highlightIndex={[
+                  Math.floor(Math.random() * 8),
+                  Math.floor(Math.random() * 8),
+                ]}
               />
             </motion.div>
           ))}
