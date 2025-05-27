@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { throttle } from '../lib/utils'
+import { throttle } from '../utils'
 
 export function useOptimizedScroll() {
   const [scrollY, setScrollY] = useState(0)
