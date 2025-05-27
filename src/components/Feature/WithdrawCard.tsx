@@ -1,14 +1,14 @@
 'use client'
 
 import { useMediaQuery } from '@/hooks/useMediaQuery'
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Image from 'next/image'
 
 export default function WithdrawCard({
   variants,
   className,
 }: {
-  variants?: any
+  variants?: Variants
   className?: string
 }) {
   const isMobile = useMediaQuery('(max-width: 480px)')

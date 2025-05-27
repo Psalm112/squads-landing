@@ -177,7 +177,7 @@ export function Footer() {
             {/* Navigation Links */}
             <nav aria-label="Footer navigation" className="mb-6">
               <div className="flex flex-wrap gap-x-8 gap-y-3">
-                {footerLinks.map((link, index) => (
+                {footerLinks.map((link) => (
                   <Link
                     key={link.name}
                     href={link.href}

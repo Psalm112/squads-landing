@@ -14,13 +14,10 @@ function Testimonials() {
   const ref = useRef(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-50px' })
-  const isSmall = useMediaQuery('(max-width: 1024px)')
 
-  // Mock data - replace with real data
   const testimonialData = {
     leaderboard: {
       title: 'First time playing on squad. First of many🤛🏼',
-      //   subtitle: '2024 (STANDARD)',
       subtitle: '',
       leaderboard: [
         {
@@ -134,7 +131,6 @@ function Testimonials() {
       },
       fixtures: [],
       author: {
-        // name: 'Premier League',
         name: '',
         handle: '@premierleague',
         avatar: '/assets/testimonials/pl.png',

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import { useInView } from 'framer-motion'
 import { useRef } from 'react'
 import { Goal, Glove, Boot, Target } from '../icons'
@@ -11,7 +11,7 @@ import { IconFeature, PlayerCardData } from '@/types'
 import Banner from '../Banner'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 
-const IconGrid = ({ variants }: { variants: any }) => {
+const IconGrid = ({ variants }: { variants: Variants }) => {
   const iconFeatures: IconFeature[] = [
     { icon: <Goal />, bgColor: 'bg-pink', shape: 'square' },
     { icon: <Glove />, bgColor: 'bg-[#6DE0E7]', shape: 'circle' },

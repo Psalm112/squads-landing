@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-
+import { Variants } from 'framer-motion'
 export interface NavigationItem {
   name: string
   href: string
@@ -25,18 +25,6 @@ export interface BettingCard {
   multiplier: string
 }
 
-// export interface PlayerCard {
-//   id: number
-//   name: string
-//   team: string
-//   position: string
-//   match: string
-//   date: string
-//   stat: string
-//   value: string
-//   avatar: string
-// }
-
 export interface PlayerCardData {
   id: number | string
   name: string
@@ -50,7 +38,7 @@ export interface PlayerCardData {
 }
 export interface PlayerCardProps {
   player: PlayerCardData
-  variants: any
+  variants: Variants
   isStandalone?: boolean
   highlightMore?: boolean
   highlightLess?: boolean
