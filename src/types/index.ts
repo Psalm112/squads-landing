@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { Variants } from 'framer-motion'
+
 export interface NavigationItem {
   name: string
   href: string
@@ -35,7 +36,17 @@ export interface PlayerCardData {
   stat: string
   value: string
   avatar: string
+  metadata?: {
+    gameId: string
+    gameStatus: string
+    isLive: boolean
+    league: string
+    sport: string
+    availableProps: number
+    playerNumber: string | null
+  }
 }
+
 export interface PlayerCardProps {
   player: PlayerCardData
   variants: Variants
@@ -43,6 +54,8 @@ export interface PlayerCardProps {
   highlightMore?: boolean
   highlightLess?: boolean
   highlightCard?: boolean
+  isLoading?: boolean
+  onBetClick?: (action: 'more' | 'less', player: PlayerCardData) => void
 }
 
 export interface IconFeature {
@@ -75,4 +88,51 @@ export interface TestimonialCardProps {
   image?: string
   hashtag?: string
   delay?: number
+}
+
+// API Error types
+export interface ApiErrorInfo {
+  type: 'rate-limit' | 'timeout' | 'validation' | 'service' | 'unknown'
+  message: string
+  retryAfter?: number
+  status?: number
+  code?: string
+  recoverable: boolean
+}
+
+// Performance metrics types
+export interface ApiMetrics {
+  requests: number
+  successfulRequests: number
+  failedRequests: number
+  totalResponseTime: number
+  avgResponseTime: number
+  successRate: number
+  lastRequestTime: number
+  cacheHitRate: number
+  cacheHits: number
+  cacheMisses: number
+}
+
+export interface PerformanceReport extends ApiMetrics {
+  status: 'excellent' | 'good' | 'fair' | 'poor'
+}
+
+// Network status types
+export interface NetworkStatus {
+  isOnline: boolean
+  connectionType: string
+  isSlowConnection: boolean
+  isFastConnection: boolean
+}
+
+// Health check types
+export interface ApiHealthStatus {
+  isHealthy: boolean
+  isOnline: boolean
+  responseTime: number
+  cacheStatus?: string
+  isChecking: boolean
+  lastCheck: number
+  checkHealth: () => void
 }
