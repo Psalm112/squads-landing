@@ -7,9 +7,10 @@ import { Goal, Glove, Boot, Target } from '../icons'
 import PlayerCard from '../ui/PlayerCard'
 import WithdrawCard from './WithdrawCard'
 import AnimatedArrow from './AnimatedArrow'
-import { IconFeature, PlayerCardData } from '@/types'
+import { IconFeature } from '@/types'
 import Banner from '../Banner'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import { useRandomPlayers } from '@/hooks/usePlayersQuery'
 
 const IconGrid = ({ variants }: { variants: Variants }) => {
   const iconFeatures: IconFeature[] = [
@@ -67,41 +68,7 @@ export default function Features() {
   const isTiny = useMediaQuery('(max-width: 350px)')
   const layoutBreak = useMediaQuery('(max-width: 1300px)')
 
-  const playerCards: PlayerCardData[] = [
-    {
-      id: 1,
-      name: 'Erling Haaland',
-      team: 'Manchester City',
-      position: 'Forward',
-      match: 'Arsenal',
-      date: 'Sat Mar 11:20 PM',
-      stat: 'Goals',
-      value: '2.5',
-      avatar: '/api/placeholder/40/40',
-    },
-    {
-      id: 2,
-      name: 'Andrea Onana',
-      team: 'Manchester United',
-      position: 'Goalkeeper',
-      match: 'Manchester City',
-      date: 'Sat Mar 11:20 PM',
-      stat: 'Saves',
-      value: '3.5',
-      avatar: '/api/placeholder/40/40',
-    },
-    {
-      id: 3,
-      name: 'Cole Palmer',
-      team: 'Chelsea',
-      position: 'Forward',
-      match: 'Fulham',
-      date: 'Sat Mar 11:20 PM',
-      stat: 'Shots',
-      value: '45.5',
-      avatar: '/api/placeholder/40/40',
-    },
-  ]
+  const { data: playerCards, isLoading, error } = useRandomPlayers(3)
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -124,6 +91,54 @@ export default function Features() {
         ease: [0.6, -0.05, 0.01, 0.99],
       },
     },
+  }
+
+  // Loading skeleton
+  const renderPlayerCards = () => {
+    if (isLoading) {
+      return Array.from({ length: 3 }, (_, index) => (
+        <div
+          key={`skeleton-${index}`}
+          className="bg-card-dark py-3 px-3 lg:px-4 rounded-xl border border-gray-700/30 animate-pulse"
+        >
+          <div className="flex items-start gap-2 sm:gap-3 w-full">
+            <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gray-600" />
+            <div className="flex-1 min-w-0 space-y-2">
+              <div className="h-4 bg-gray-600 rounded w-3/4" />
+              <div className="h-3 bg-gray-600 rounded w-1/2" />
+              <div className="h-3 bg-gray-600 rounded w-2/3" />
+            </div>
+            <div className="w-12 h-16 sm:w-16 sm:h-20 lg:w-20 lg:h-24 bg-gray-600 rounded-lg" />
+            <div className="flex flex-col gap-2 h-16 sm:h-20 lg:h-24">
+              <div className="flex-1 w-16 bg-gray-600 rounded" />
+              <div className="flex-1 w-16 bg-gray-600 rounded" />
+            </div>
+          </div>
+        </div>
+      ))
+    }
+
+    if (error || !playerCards) {
+      return Array.from({ length: 3 }, (_, index) => (
+        <div
+          key={`error-${index}`}
+          className="bg-card-dark py-3 px-3 lg:px-4 rounded-xl border border-gray-700/30 text-center text-gray-400"
+        >
+          <p className="text-sm">Player data unavailable</p>
+        </div>
+      ))
+    }
+
+    return playerCards.map((player, index) => (
+      <PlayerCard
+        key={player.id}
+        player={player}
+        highlightCard={index === 0 || index === 1}
+        highlightMore={index === 0}
+        highlightLess={index === 1}
+        variants={itemVariants}
+      />
+    ))
   }
 
   return (
@@ -207,20 +222,10 @@ export default function Features() {
                     variants={itemVariants}
                     className="space-y-4 px-2 max-w-lg mx-auto"
                   >
-                    {playerCards.map((player, index) => (
-                      <PlayerCard
-                        key={player.id}
-                        player={player}
-                        highlightCard={
-                          index === 0 || index === 1 ? true : false
-                        }
-                        highlightMore={index === 0 ? true : false}
-                        highlightLess={index === 1 ? true : false}
-                        variants={itemVariants}
-                      />
-                    ))}
+                    {renderPlayerCards()}
                   </motion.div>
                 </div>
+
                 {/* Entry Cards */}
                 <motion.div
                   variants={itemVariants}
@@ -309,18 +314,7 @@ export default function Features() {
                       variants={itemVariants}
                       className="space-y-4 max-w-lg mx-auto"
                     >
-                      {playerCards.map((player, index) => (
-                        <PlayerCard
-                          key={player.id}
-                          player={player}
-                          highlightCard={
-                            index === 0 || index === 1 ? true : false
-                          }
-                          highlightMore={index === 0 ? true : false}
-                          highlightLess={index === 1 ? true : false}
-                          variants={itemVariants}
-                        />
-                      ))}
+                      {renderPlayerCards()}
                     </motion.div>
                   </div>
                 </div>
