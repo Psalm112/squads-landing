@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchPlayers } from '@/lib/api'
+import { useMemo, useState } from 'react'
+import { useEffect } from 'react'
 
 export const usePlayersQuery = () => {
   return useQuery({
@@ -14,14 +16,21 @@ export const usePlayersQuery = () => {
 }
 
 export const useRandomPlayers = (count: number = 3) => {
+  const [mounted, setMounted] = useState(false)
   const { data: players, ...queryResult } = usePlayersQuery()
 
-  const randomPlayers = players
-    ? [...players].sort(() => 0.5 - Math.random()).slice(0, count)
-    : undefined
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const randomPlayers = useMemo(() => {
+    if (!mounted || !players) return undefined
+    return [...players].sort(() => Math.random() - 0.5).slice(0, count)
+  }, [players, count, mounted])
 
   return {
     ...queryResult,
     data: randomPlayers,
+    isLoading: queryResult.isLoading || !mounted,
   }
 }
