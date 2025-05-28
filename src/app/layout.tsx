@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { Gloria_Hallelujah } from 'next/font/google'
@@ -22,7 +22,14 @@ const poppins = Poppins({
   display: 'swap',
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1A222C',
+}
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://squads-landing.vercel.app'),
   title: 'Squads - The New Way to Win Money on Sports',
   description:
     'Just pick More or Less on player stats and win up to 100X your cash! The simplest way to make money from sports betting.',
@@ -32,8 +39,6 @@ export const metadata: Metadata = {
   creator: 'Samuel Oyeuga',
   publisher: 'Samuel Oyeuga',
   robots: 'index, follow',
-  viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#1A222C',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -64,7 +69,6 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png',
     apple: '/apple-touch-icon.png',
   },
-  manifest: '/site.webmanifest',
 }
 
 export default function RootLayout({
