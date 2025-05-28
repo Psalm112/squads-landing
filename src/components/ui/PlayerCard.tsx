@@ -7,7 +7,6 @@ import { IoArrowDown, IoArrowUp, IoTimer, IoFootball } from 'react-icons/io5'
 import { RxAvatar } from 'react-icons/rx'
 import { useState, useCallback, memo } from 'react'
 
-// Memoized component for better performance
 const PlayerCard = memo(function PlayerCard({
   player,
   variants,
@@ -41,7 +40,6 @@ const PlayerCard = memo(function PlayerCard({
   const shouldShowImage =
     player.avatar && !imageError && player.avatar.trim() !== ''
 
-  // Enhanced card variants with loading state
   const cardVariants = {
     ...variants,
     loading: {
@@ -76,7 +74,6 @@ const PlayerCard = memo(function PlayerCard({
       onKeyDown={(e) => {
         if ((e.key === 'Enter' || e.key === ' ') && !isLoading) {
           e.preventDefault()
-          // Focus on the first action button
           const moreButton = e.currentTarget.querySelector(
             '[data-action="more"]'
           ) as HTMLButtonElement
@@ -102,7 +99,6 @@ const PlayerCard = memo(function PlayerCard({
       </AnimatePresence>
 
       <div className="flex items-start gap-2 sm:gap-3 w-full">
-        {/* Player Avatar with enhanced loading state */}
         <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex-shrink-0 overflow-hidden relative group-hover:ring-2 group-hover:ring-light-green/30 transition-all duration-300">
           {shouldShowImage ? (
             <>
@@ -140,7 +136,7 @@ const PlayerCard = memo(function PlayerCard({
           )}
         </div>
 
-        {/* Player Info with enhanced styling */}
+        {/* Player Info */}
         <div className="flex-1 min-w-0 space-y-0.5">
           <h3 className="font-semibold sm:font-bold text-white text-sm lg:text-lg truncate group-hover:text-light-green transition-colors duration-300">
             {player.name}
@@ -173,7 +169,7 @@ const PlayerCard = memo(function PlayerCard({
           </div>
         </div>
 
-        {/* Enhanced Stats Display */}
+        {/* Stats Display */}
         <div className="self-center text-center bg-dark-navy rounded-lg border border-cream/20 w-12 h-16 sm:w-16 sm:h-20 lg:w-20 lg:h-24 flex items-center justify-center flex-shrink-0 group-hover:border-light-green/40 transition-colors duration-300">
           <div className="space-y-1">
             <div className="text-base sm:text-lg lg:text-2xl font-black text-white leading-none group-hover:text-light-green transition-colors duration-300">
@@ -185,7 +181,7 @@ const PlayerCard = memo(function PlayerCard({
           </div>
         </div>
 
-        {/* Enhanced Action Buttons */}
+        {/* Action Buttons */}
         <div className="flex h-full flex-col gap-2 self-center ml-2 lg:ml-3">
           <motion.button
             data-action="more"

@@ -1,9 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchPlayers } from '@/lib/api'
 import { useMemo, useState, useEffect } from 'react'
-import { PlayerCardData } from '@/types'
 
-// Main players query
 export function usePlayersQuery() {
   return useQuery({
     queryKey: ['players', 'shots_on_target'],
@@ -12,7 +10,6 @@ export function usePlayersQuery() {
     refetchInterval: 10 * 60 * 1000, // 10 minutes
     refetchOnWindowFocus: false,
     retry: (failureCount, error) => {
-      // Don't retry rate limit errors
       if (error instanceof Error && error.message.includes('Rate limited')) {
         return false
       }
@@ -23,7 +20,7 @@ export function usePlayersQuery() {
   })
 }
 
-// Random players hook - matches PlayerCard usage
+// Random players hook
 export function useRandomPlayers(count: number = 3) {
   const [mounted, setMounted] = useState(false)
   const [seed, setSeed] = useState(0)
@@ -35,11 +32,10 @@ export function useRandomPlayers(count: number = 3) {
     setSeed(Date.now()) // Initial seed
   }, [])
 
-  // Stable random selection
   const randomPlayers = useMemo(() => {
     if (!mounted || !players?.length) return undefined
 
-    // Simple seeded shuffle
+    // shuffle
     const shuffled = [...players].sort(() => {
       const x = Math.sin(seed) * 10000
       return x - Math.floor(x) - 0.5

@@ -1,10 +1,10 @@
+import { ApiResponse } from '@/types'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Simple in-memory cache
-const cache = new Map<string, { data: any; expires: number }>()
+const cache = new Map<string, { data: ApiResponse; expires: number }>()
 const CACHE_TTL = 5 * 60 * 1000 // 5 minutes
 
-// Rate limiting - simple sliding window
+// Rate limiting
 const requests = new Map<string, number[]>()
 const RATE_LIMIT = { requests: 60, window: 60 * 1000 }
 
@@ -43,11 +43,11 @@ function getCachedData(key: string) {
   return null
 }
 
-function setCachedData(key: string, data: any) {
+function setCachedData(key: string, data: ApiResponse) {
   cache.set(key, { data, expires: Date.now() + CACHE_TTL })
 }
 
-async function fetchPlayersData() {
+async function fetchPlayersData(): Promise<ApiResponse> {
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 10000)
 

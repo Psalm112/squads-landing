@@ -81,7 +81,7 @@ const cardHoverVariants = {
 
 function Blog() {
   return (
-    <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
+    <section className="max-w-7xl mx-auto py-[170px] px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <motion.div
         className="text-center flex flex-col gap-y-3 mb-8 sm:mb-12"

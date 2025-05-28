@@ -1,39 +1,12 @@
-import { PlayerCardData } from '@/types'
-
-interface ApiPlayer {
-  player: {
-    id: string
-    name: string
-    imageUrl?: string
-    position: string
-    team: { id: string }
-    number?: string | null
-  }
-  game: {
-    isLive: boolean
-    startDate: string
-    homeTeam: { id: string; nickname: string }
-    awayTeam: { id: string; nickname: string }
-  }
-  props: Array<{
-    betPoints: number
-    lines: Array<{ isAvailable: boolean }>
-  }>
-}
-
-interface ApiResponse {
-  props: ApiPlayer[]
-}
+import { ApiPlayer, ApiResponse, PlayerCardData } from '@/types'
 
 // Transform API data to PlayerCard format
 function transformPlayer(apiPlayer: ApiPlayer): PlayerCardData | null {
   try {
-    // Basic validation
     if (!apiPlayer?.player?.id || !apiPlayer?.player?.name) {
       return null
     }
 
-    // Skip if no available props
     const hasAvailableProps = apiPlayer.props?.some((prop) =>
       prop.lines?.some((line) => line.isAvailable)
     )
@@ -60,7 +33,6 @@ function transformPlayer(apiPlayer: ApiPlayer): PlayerCardData | null {
       }
     )
 
-    // Get bet points
     const betPoints = apiPlayer.props[0]?.betPoints ?? 0.5
 
     return {
@@ -105,7 +77,6 @@ function formatPosition(pos: string): string {
   return positions[pos.toUpperCase()] || 'Player'
 }
 
-// Main fetch function with retry logic
 export async function fetchPlayers(): Promise<PlayerCardData[]> {
   let lastError: Error
 
@@ -126,7 +97,6 @@ export async function fetchPlayers(): Promise<PlayerCardData[]> {
 
       const data: ApiResponse = await response.json()
 
-      // Basic structure check
       if (!data?.props || !Array.isArray(data.props)) {
         throw new Error('Invalid API response structure')
       }

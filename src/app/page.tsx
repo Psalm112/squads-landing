@@ -13,7 +13,8 @@ import Community from '@/components/Community'
 import CallToAction from '@/components/CallToAction'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import Loading from './loading'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import Image from 'next/image'
 
 export default function HomePage() {
   const isXL = useMediaQuery('(min-width: 1280px)')
@@ -21,6 +22,12 @@ export default function HomePage() {
   const isMD = useMediaQuery('(min-width: 768px)')
   const isSM = useMediaQuery('(min-width: 380px)')
   const [isLoading, setIsLoading] = useState(true)
+
+  const handleImageClick = useCallback(() => {
+    window.open('/signup', '_blank')
+  }, [])
+
+  const aspectRatio = isMD ? 1199 / 664 : 402 / 769
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000)
@@ -121,6 +128,33 @@ export default function HomePage() {
       </main>
       <Community />
       <Blog />
+      <motion.div
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { duration: 0.6, staggerChildren: 0.15 },
+          },
+        }}
+        initial="hidden"
+        whileInView="visible"
+        whileTap={{ scale: 0.96 }}
+        viewport={{ once: true, margin: '-50px' }}
+        className="relative max-w-7xl w-full mx-auto"
+        style={{ aspectRatio }}
+        onClick={handleImageClick}
+        role="button"
+        tabIndex={0}
+      >
+        <Image
+          src={`/assets/footer-display${isMD ? '' : '-sm'}.svg`}
+          alt="Background"
+          fill
+          className="w-full h-full object-contain cursor-pointer px-4 sm:px-6 lg:px-8"
+          priority
+        />
+      </motion.div>
+
       <Footer />
     </motion.div>
   )

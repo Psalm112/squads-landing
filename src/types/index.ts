@@ -90,49 +90,27 @@ export interface TestimonialCardProps {
   delay?: number
 }
 
-// API Error types
-export interface ApiErrorInfo {
-  type: 'rate-limit' | 'timeout' | 'validation' | 'service' | 'unknown'
-  message: string
-  retryAfter?: number
-  status?: number
-  code?: string
-  recoverable: boolean
+export interface ApiPlayer {
+  player: {
+    id: string
+    name: string
+    imageUrl?: string
+    position: string
+    team: { id: string }
+    number?: string | null
+  }
+  game: {
+    isLive: boolean
+    startDate: string
+    homeTeam: { id: string; nickname: string }
+    awayTeam: { id: string; nickname: string }
+  }
+  props: Array<{
+    betPoints: number
+    lines: Array<{ isAvailable: boolean }>
+  }>
 }
 
-// Performance metrics types
-export interface ApiMetrics {
-  requests: number
-  successfulRequests: number
-  failedRequests: number
-  totalResponseTime: number
-  avgResponseTime: number
-  successRate: number
-  lastRequestTime: number
-  cacheHitRate: number
-  cacheHits: number
-  cacheMisses: number
-}
-
-export interface PerformanceReport extends ApiMetrics {
-  status: 'excellent' | 'good' | 'fair' | 'poor'
-}
-
-// Network status types
-export interface NetworkStatus {
-  isOnline: boolean
-  connectionType: string
-  isSlowConnection: boolean
-  isFastConnection: boolean
-}
-
-// Health check types
-export interface ApiHealthStatus {
-  isHealthy: boolean
-  isOnline: boolean
-  responseTime: number
-  cacheStatus?: string
-  isChecking: boolean
-  lastCheck: number
-  checkHealth: () => void
+export interface ApiResponse {
+  props: ApiPlayer[]
 }
