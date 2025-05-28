@@ -4,6 +4,7 @@ import { PlayerCardProps } from '@/types'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { IoArrowDown, IoArrowUp } from 'react-icons/io5'
+import { RxAvatar } from 'react-icons/rx'
 
 export default function PlayerCard({
   player,
@@ -36,15 +37,19 @@ export default function PlayerCard({
       <div className="flex items-start gap-2 sm:gap-3 w-full">
         {/* Player Avatar */}
         <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex-shrink-0 overflow-hidden">
-          <Image
-            src="/assets/onana.jpg"
-            className="object-cover w-full h-full"
-            width={56}
-            height={56}
-            alt={`${player.name} profile picture`}
-            loading="lazy"
-            sizes="(max-width: 1024px) 40px, 56px"
-          />
+          {player && player.avatar === '' ? (
+            <Image
+              src={player.avatar}
+              className="object-cover w-full h-full"
+              width={56}
+              height={56}
+              alt={`${player.name} profile picture`}
+              loading="lazy"
+              sizes="(max-width: 1024px) 40px, 56px"
+            />
+          ) : (
+            <RxAvatar className="text-gray-400 w-10 h-10 lg:w-14 lg:h-14" />
+          )}
         </div>
 
         {/* Player Info */}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { Gloria_Hallelujah } from 'next/font/google'
+import QueryProvider from '@/providers/QueryProvider'
 
 const gloria = Gloria_Hallelujah({
   subsets: ['latin'],
@@ -87,7 +88,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-dark-navy antialiased text-text-primary`}
       >
-        {children}
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   )

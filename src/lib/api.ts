@@ -94,10 +94,7 @@ export const transformApiPlayerToCardData = (
     date: gameDate,
     stat: 'Shots on Target',
     value: betPoints.toString(),
-    avatar:
-      apiPlayer.player.imageUrl128 ||
-      apiPlayer.player.imageUrl ||
-      '/assets/onana.jpg',
+    avatar: apiPlayer.player.imageUrl || '',
   }
 }
 
