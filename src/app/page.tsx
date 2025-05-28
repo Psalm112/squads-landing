@@ -104,7 +104,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        {/* <Players /> */}
+        <Players />
         <div
           className="min-h-[100vh] pb-24 flex flex-col gap-y-[130px] xl:gap-y-[250px]"
           style={{

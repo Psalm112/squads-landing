@@ -132,7 +132,7 @@ const PlayerCard = memo(function PlayerCard({
                 sizes="(max-width: 1024px) 40px, 56px"
                 onError={handleImageError}
                 onLoad={handleImageLoad}
-                priority={isStandalone} // Priority loading for standalone cards
+                // priority={isStandalone}
               />
             </>
           ) : (
