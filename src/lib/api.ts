@@ -1,205 +1,98 @@
 import { PlayerCardData } from '@/types'
-import { z } from 'zod'
 
-// Validation schemas matching API response
-const ApiPlayerSchema = z.object({
-  groupId: z.string(),
-  player: z.object({
-    id: z.string(),
-    name: z.string(),
-    imageUrl: z.string().optional(),
-    imageUrl128: z.string().optional(),
-    position: z.string(),
-    team: z.object({
-      id: z.string(),
-    }),
-    number: z.string().nullable(),
-  }),
-  sport: z.string(),
-  game: z.object({
-    id: z.string(),
-    status: z.string(),
-    isLive: z.boolean(),
-    startDate: z.string(),
-    league: z.string(),
-    homeTeam: z.object({
-      id: z.string(),
-      name: z.string(),
-      abbreviation: z.string(),
-      nickname: z.string(),
-    }),
-    awayTeam: z.object({
-      id: z.string(),
-      name: z.string(),
-      abbreviation: z.string(),
-      nickname: z.string(),
-    }),
-  }),
-  market: z.object({
-    id: z.string(),
-    name: z.string(),
-  }),
-  parlaySelectionsCount: z.number(),
-  props: z.array(
-    z.object({
-      lines: z.array(
-        z.object({
-          id: z.string(),
-          selectionLine: z.string(),
-          isAvailable: z.boolean(),
-        })
-      ),
-      betPoints: z.number(),
-      type: z.string(),
-    })
-  ),
-})
-
-const ApiResponseSchema = z.object({
-  props: z.array(ApiPlayerSchema),
-  pagination: z.object({
-    page: z.number(),
-    size: z.number(),
-    totalCount: z.number(),
-    lastPage: z.number(),
-  }),
-})
-
-export type ApiPlayer = z.infer<typeof ApiPlayerSchema>
-export type ApiResponse = z.infer<typeof ApiResponseSchema>
-
-// Custom error classes
-export class ApiTimeoutError extends Error {
-  constructor(
-    message = 'Request timeout',
-    public retryAfter?: number
-  ) {
-    super(message)
-    this.name = 'ApiTimeoutError'
+interface ApiPlayer {
+  player: {
+    id: string
+    name: string
+    imageUrl?: string
+    position: string
+    team: { id: string }
+    number?: string | null
   }
+  game: {
+    isLive: boolean
+    startDate: string
+    homeTeam: { id: string; nickname: string }
+    awayTeam: { id: string; nickname: string }
+  }
+  props: Array<{
+    betPoints: number
+    lines: Array<{ isAvailable: boolean }>
+  }>
 }
 
-export class ApiRateLimitError extends Error {
-  constructor(
-    message = 'Rate limit exceeded',
-    public retryAfter?: number
-  ) {
-    super(message)
-    this.name = 'ApiRateLimitError'
-  }
+interface ApiResponse {
+  props: ApiPlayer[]
 }
 
-export class ApiValidationError extends Error {
-  constructor(
-    message = 'Invalid API response',
-    public details?: any
-  ) {
-    super(message)
-    this.name = 'ApiValidationError'
-    this.details = details
-  }
-}
-
-export class ApiServiceError extends Error {
-  constructor(
-    message = 'Service error',
-    public status?: number,
-    public code?: string
-  ) {
-    super(message)
-    this.name = 'ApiServiceError'
-    this.status = status
-    this.code = code
-  }
-}
-
-// Enhanced transformation function
-export const transformApiPlayerToCardData = (
-  apiPlayer: ApiPlayer
-): PlayerCardData | null => {
+// Transform API data to PlayerCard format
+function transformPlayer(apiPlayer: ApiPlayer): PlayerCardData | null {
   try {
-    // Validate required fields
-    if (!apiPlayer.player?.id || !apiPlayer.player?.name) {
-      console.warn('Invalid player data: missing required fields', {
-        playerId: apiPlayer.player?.id,
-        playerName: apiPlayer.player?.name,
-      })
+    // Basic validation
+    if (!apiPlayer?.player?.id || !apiPlayer?.player?.name) {
       return null
     }
 
-    // Skip players with no available props
-    const availableProps = apiPlayer.props.filter((prop) =>
-      prop.lines.some((line) => line.isAvailable)
+    // Skip if no available props
+    const hasAvailableProps = apiPlayer.props?.some((prop) =>
+      prop.lines?.some((line) => line.isAvailable)
     )
+    if (!hasAvailableProps) return null
 
-    if (availableProps.length === 0) {
-      return null
-    }
-
-    // Determine opponent team
-    const isHomeTeam = apiPlayer.player.team.id === apiPlayer.game.homeTeam.id
-    const opponent = isHomeTeam
+    // Determine opponent
+    const isHome = apiPlayer.player.team.id === apiPlayer.game.homeTeam.id
+    const opponent = isHome
       ? apiPlayer.game.awayTeam.nickname
       : apiPlayer.game.homeTeam.nickname
-
-    const playerTeam = isHomeTeam
+    const team = isHome
       ? apiPlayer.game.homeTeam.nickname
       : apiPlayer.game.awayTeam.nickname
 
-    // Format game date
-    const gameDate = new Date(apiPlayer.game.startDate)
-    const formattedDate = gameDate.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: '2-digit',
-      timeZone: 'UTC',
-    })
+    // Format date
+    const date = new Date(apiPlayer.game.startDate).toLocaleDateString(
+      'en-US',
+      {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+      }
+    )
 
-    // Get the main bet point (prefer NORMAL type, fallback to first available)
-    const normalProp = apiPlayer.props.find((prop) => prop.type === 'NORMAL')
-    const mainProp = normalProp || apiPlayer.props[0]
-    const betPoints = mainProp?.betPoints ?? 0.5
-
-    // Choose best available image
-    const avatar =
-      apiPlayer.player.imageUrl || apiPlayer.player.imageUrl128 || ''
+    // Get bet points
+    const betPoints = apiPlayer.props[0]?.betPoints ?? 0.5
 
     return {
       id: apiPlayer.player.id,
       name: apiPlayer.player.name,
-      team: playerTeam,
-      position: getPositionName(apiPlayer.player.position),
-      match: opponent,
-      date: formattedDate,
+      team: team || 'Unknown',
+      position: formatPosition(apiPlayer.player.position),
+      match: opponent || 'TBD',
+      date,
       stat: 'Shots on Target',
-      value: formatBetPoints(betPoints),
-      avatar: avatar,
-      // Additional metadata for future use
+      value: betPoints % 1 === 0 ? betPoints.toString() : betPoints.toFixed(1),
+      avatar: apiPlayer.player.imageUrl || '',
       metadata: {
-        gameId: apiPlayer.game.id,
-        gameStatus: apiPlayer.game.status,
+        gameId: `${apiPlayer.game.homeTeam.id}-${apiPlayer.game.awayTeam.id}`,
+        gameStatus: 'scheduled',
         isLive: apiPlayer.game.isLive,
-        league: apiPlayer.game.league,
-        sport: apiPlayer.sport,
-        availableProps: availableProps.length,
-        playerNumber: apiPlayer.player.number,
+        league: 'Premier League',
+        sport: 'football',
+        availableProps: apiPlayer.props?.length || 0,
+        playerNumber: apiPlayer.player.number || null,
       },
     }
   } catch (error) {
-    console.error('Error transforming player data:', {
-      error: error instanceof Error ? error.message : 'Unknown error',
-      playerId: apiPlayer.player?.id,
-      playerName: apiPlayer.player?.name,
-    })
+    console.warn('Failed to transform player:', error)
     return null
   }
 }
 
-// Utility functions
-const getPositionName = (position: string): string => {
-  const positionMap: Record<string, string> = {
+function formatPosition(pos: string): string {
+  if (!pos) return 'Player'
+
+  const positions: Record<string, string> = {
     F: 'Forward',
     M: 'Midfielder',
     D: 'Defender',
@@ -209,216 +102,53 @@ const getPositionName = (position: string): string => {
     DF: 'Defender',
     GK: 'Goalkeeper',
   }
-  return positionMap[position?.toUpperCase()] || 'Player'
+  return positions[pos.toUpperCase()] || 'Player'
 }
 
-const formatBetPoints = (points: number): string => {
-  // Handle decimal formatting
-  if (points % 1 === 0) {
-    return points.toString()
-  }
-  return points.toFixed(1)
-}
+// Main fetch function with retry logic
+export async function fetchPlayers(): Promise<PlayerCardData[]> {
+  let lastError: Error
 
-// Enhanced fetch function with better error handling
-export const fetchPlayers = async (
-  options: {
-    timeout?: number
-    retries?: number
-  } = {}
-): Promise<PlayerCardData[]> => {
-  const { timeout = 15000, retries = 3 } = options
-
-  const controller = new AbortController()
-  const timeoutId = setTimeout(() => controller.abort(), timeout)
-
-  let lastError: Error = new Error('Unknown error')
-
-  for (let attempt = 1; attempt <= retries; attempt++) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
     try {
       const response = await fetch('/api/players', {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache',
-        },
-        signal: controller.signal,
+        headers: { Accept: 'application/json' },
+        signal: AbortSignal.timeout(15000),
       })
 
-      clearTimeout(timeoutId)
-
-      // Handle different status codes
       if (response.status === 429) {
-        const errorData = await response.json().catch(() => ({}))
-        const retryAfter = parseInt(response.headers.get('retry-after') || '60')
-        throw new ApiRateLimitError(
-          errorData.message || 'Too many requests. Please try again later.',
-          retryAfter
-        )
-      }
-
-      if (response.status === 504) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new ApiTimeoutError(
-          errorData.message || 'Service timeout. Please try again.'
-        )
-      }
-
-      if (response.status === 503) {
-        const errorData = await response.json().catch(() => ({}))
-        const retryAfter = parseInt(response.headers.get('retry-after') || '60')
-        throw new ApiServiceError(
-          errorData.message || 'Service temporarily unavailable.',
-          response.status,
-          errorData.code
-        )
+        throw new Error('Rate limited')
       }
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}))
-        throw new ApiServiceError(
-          errorData.message || `HTTP error! status: ${response.status}`,
-          response.status,
-          errorData.code
-        )
+        throw new Error(`HTTP ${response.status}`)
       }
 
-      // Parse and validate response
-      const rawData = await response.json()
+      const data: ApiResponse = await response.json()
 
-      try {
-        const validatedData = ApiResponseSchema.parse(rawData)
-
-        // Transform players and filter out invalid ones
-        const transformedPlayers = validatedData.props
-          .map(transformApiPlayerToCardData)
-          .filter((player): player is PlayerCardData => player !== null)
-
-        console.log(
-          `Successfully fetched ${transformedPlayers.length} players out of ${validatedData.props.length} total`
-        )
-
-        // Log cache status for debugging
-        const cacheStatus = response.headers.get('x-cache-status')
-        const responseTime = response.headers.get('x-response-time')
-
-        if (process.env.NODE_ENV === 'development') {
-          console.log(
-            `API Response - Cache: ${cacheStatus}, Time: ${responseTime}`
-          )
-        }
-
-        return transformedPlayers
-      } catch (validationError) {
-        if (validationError instanceof z.ZodError) {
-          console.error(
-            'API response validation failed:',
-            validationError.errors
-          )
-          throw new ApiValidationError(
-            'Invalid API response structure',
-            validationError.errors
-          )
-        }
-        throw validationError
+      // Basic structure check
+      if (!data?.props || !Array.isArray(data.props)) {
+        throw new Error('Invalid API response structure')
       }
+
+      return data.props
+        .map(transformPlayer)
+        .filter((player): player is PlayerCardData => player !== null)
     } catch (error) {
       lastError = error as Error
 
-      // Don't retry for these error types
       if (
-        error instanceof ApiRateLimitError ||
-        error instanceof ApiValidationError
+        attempt === 3 ||
+        (error instanceof Error && error.message === 'Rate limited')
       ) {
-        throw error
-      }
-
-      // Don't retry on the last attempt
-      if (attempt === retries) {
         break
       }
 
-      // Exponential backoff with jitter
-      const baseDelay = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
-      const jitter = Math.random() * 1000
-      const delay = baseDelay + jitter
-
-      console.warn(
-        `Fetch attempt ${attempt}/${retries} failed, retrying in ${delay}ms:`,
-        {
-          error: error instanceof Error ? error.message : 'Unknown error',
-          attempt,
-          delay,
-        }
-      )
-
+      // Exponential backoff
+      const delay = Math.min(1000 * Math.pow(2, attempt - 1), 5000)
       await new Promise((resolve) => setTimeout(resolve, delay))
     }
   }
 
-  clearTimeout(timeoutId)
-
-  // Handle the final error
-  if (lastError instanceof Error) {
-    if (lastError.name === 'AbortError') {
-      throw new ApiTimeoutError('Request was cancelled due to timeout')
-    }
-
-    console.error('Failed to fetch players after all retries:', {
-      error: lastError.message,
-      stack: lastError.stack,
-      timestamp: new Date().toISOString(),
-    })
-
-    throw new ApiServiceError(`Failed to fetch players: ${lastError.message}`)
-  }
-
-  throw new ApiServiceError(
-    'An unexpected error occurred while fetching players'
-  )
-}
-
-// Health check function
-export const checkApiHealth = async (): Promise<{
-  healthy: boolean
-  responseTime: number
-  cacheStatus?: string
-}> => {
-  const startTime = Date.now()
-
-  try {
-    const response = await fetch('/api/players', {
-      method: 'HEAD',
-      signal: AbortSignal.timeout(5000),
-    })
-
-    const responseTime = Date.now() - startTime
-    const cacheStatus = response.headers.get('x-cache-status')
-
-    return {
-      healthy: response.ok,
-      responseTime,
-      cacheStatus: cacheStatus || undefined,
-    }
-  } catch (error) {
-    return {
-      healthy: false,
-      responseTime: Date.now() - startTime,
-    }
-  }
-}
-
-// Preload function for better UX
-export const preloadPlayers = async (): Promise<void> => {
-  try {
-    // Use a lightweight HEAD request to warm up the cache
-    await fetch('/api/players', {
-      method: 'HEAD',
-      headers: { 'Cache-Control': 'no-cache' },
-    })
-  } catch (error) {
-    // Silently fail preload attempts
-    console.debug('Preload failed:', error)
-  }
+  throw lastError!
 }

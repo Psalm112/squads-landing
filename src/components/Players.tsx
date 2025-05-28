@@ -168,13 +168,7 @@ const ErrorRow: React.FC<{
 ErrorRow.displayName = 'ErrorRow'
 
 const Players: React.FC = () => {
-  const {
-    data: players,
-    isLoading,
-    error,
-    refetch,
-    errorType,
-  } = usePlayersQuery()
+  const { data: players, isLoading, error, refetch } = usePlayersQuery()
 
   // Generate stable highlight indices for consistent highlighting
   const highlightIndices = useMemo(() => {
@@ -285,7 +279,7 @@ const Players: React.FC = () => {
           <ErrorRow
             rowIndex={rowIndex}
             onRetry={handleRetry}
-            errorType={errorType}
+            // errorType={errorType}
           />
         </motion.div>
       ))
@@ -309,7 +303,7 @@ const Players: React.FC = () => {
   }, [
     isLoading,
     error,
-    errorType,
+    // errorType,
     players,
     playerRows,
     rowVariants,
