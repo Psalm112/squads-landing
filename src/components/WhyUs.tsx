@@ -37,7 +37,7 @@ const features: FeatureCard[] = [
           alt="love numerous options"
           width={16}
           height={16}
-          className="inline"
+          className="inline w-auto h-auto"
         />
       </span>
     ),

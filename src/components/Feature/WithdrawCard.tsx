@@ -29,7 +29,7 @@ export default function WithdrawCard({
             alt="Celebration background"
             width={isMobile ? (isTiny ? 170 : 200) : 250}
             height={100}
-            className="object-cover"
+            className="object-cover w-auto h-auto"
           />
         </div>
         <div className="text-center space-y-2 sm:space-y-4">

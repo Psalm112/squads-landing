@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { IoArrowDown, IoArrowUp } from 'react-icons/io5'
 import { RxAvatar } from 'react-icons/rx'
+import { useState } from 'react'
 
 export default function PlayerCard({
   player,
@@ -14,10 +15,25 @@ export default function PlayerCard({
   highlightLess = false,
   highlightCard = false,
 }: PlayerCardProps) {
+  const [imageError, setImageError] = useState(false)
+  const [imageLoading, setImageLoading] = useState(true)
+
+  const handleImageError = () => {
+    setImageError(true)
+    setImageLoading(false)
+  }
+
+  const handleImageLoad = () => {
+    setImageLoading(false)
+  }
+
+  const shouldShowImage =
+    player.avatar && !imageError && player.avatar.trim() !== ''
+
   return (
     <motion.div
       variants={variants}
-      className={`relative bg-card-dark py-3 px-3 lg:px-4 rounded-xl border  transition-all duration-300 ${
+      className={`relative bg-card-dark py-3 px-3 lg:px-4 rounded-xl border transition-all duration-300 ${
         isStandalone ? 'shadow-lg hover:shadow-xl' : 'shadow-md hover:shadow-lg'
       } ${highlightCard ? 'border-light-green' : 'border-gray-700/30'}`}
       whileHover={{
@@ -36,17 +52,28 @@ export default function PlayerCard({
     >
       <div className="flex items-start gap-2 sm:gap-3 w-full">
         {/* Player Avatar */}
-        <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex-shrink-0 overflow-hidden">
-          {player && player.avatar === '' ? (
-            <Image
-              src={player.avatar}
-              className="object-cover w-full h-full"
-              width={56}
-              height={56}
-              alt={`${player.name} profile picture`}
-              loading="lazy"
-              sizes="(max-width: 1024px) 40px, 56px"
-            />
+        <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex-shrink-0 overflow-hidden relative">
+          {shouldShowImage ? (
+            <>
+              {imageLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-6 h-6 lg:w-8 lg:h-8 border-2 border-gray-400 border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+              <Image
+                src={player.avatar}
+                className={`object-cover w-full h-full transition-opacity duration-200 ${
+                  imageLoading ? 'opacity-0' : 'opacity-100'
+                }`}
+                width={56}
+                height={56}
+                alt={`${player.name} profile picture`}
+                loading="lazy"
+                sizes="(max-width: 1024px) 40px, 56px"
+                onError={handleImageError}
+                onLoad={handleImageLoad}
+              />
+            </>
           ) : (
             <RxAvatar className="text-gray-400 w-10 h-10 lg:w-14 lg:h-14" />
           )}

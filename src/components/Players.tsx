@@ -3,56 +3,8 @@
 import React, { useMemo } from 'react'
 import { motion } from 'framer-motion'
 import PlayerCard from './ui/PlayerCard'
+import { usePlayersQuery } from '@/hooks/usePlayersQuery'
 import { PlayerCardProps } from '@/types'
-
-// Mock data - replace with API call in the future
-const generateMockPlayers = (count: number): PlayerCardProps['player'][] => {
-  const names = [
-    'Erling Haaland',
-    'Kevin De Bruyne',
-    'Bernardo Silva',
-    'Jack Grealish',
-    'Riyad Mahrez',
-    'Phil Foden',
-  ]
-  const teams = [
-    'Manchester City',
-    'Liverpool',
-    'Arsenal',
-    'Chelsea',
-    'Tottenham',
-    'Manchester United',
-  ]
-  const positions = ['Forward', 'Midfielder', 'Defender', 'Goalkeeper']
-  const stats = [
-    'Shots on Target',
-    'Goals',
-    'Assists',
-    'Saves',
-    'Passes',
-    'Tackles',
-  ]
-  const opponents = [
-    'Arsenal',
-    'Liverpool',
-    'Chelsea',
-    'Tottenham',
-    'Newcastle',
-    'Brighton',
-  ]
-
-  return Array.from({ length: count }, (_, index) => ({
-    id: `player-${index}`,
-    name: names[index % names.length],
-    team: teams[index % teams.length],
-    position: positions[index % positions.length],
-    match: opponents[index % opponents.length],
-    date: '3rd Mar 11:20 PM',
-    value: (2.5 + Math.random() * 2).toFixed(1),
-    stat: stats[index % stats.length],
-    avatar: '/assets/onana.jpg',
-  }))
-}
 
 const InfiniteScrollRow: React.FC<{
   players: PlayerCardProps['player'][]
@@ -84,7 +36,7 @@ const InfiniteScrollRow: React.FC<{
       aria-label={`Player stats row ${rowIndex + 1}`}
     >
       <motion.div
-        className="flex gap-4 will-change-transform"
+        className="flex gap-4 will-change-transform py-2"
         animate={{
           x: direction === 'left' ? ['0%', '-50%'] : ['-50%', '0%'],
         }}
@@ -104,7 +56,8 @@ const InfiniteScrollRow: React.FC<{
               variants={cardVariants}
               isStandalone={false}
               highlightCard={
-                highlightIndex && highlightIndex.includes(index) ? true : false
+                highlightIndex &&
+                highlightIndex.includes(index % players.length)
               }
             />
           </div>
@@ -114,16 +67,76 @@ const InfiniteScrollRow: React.FC<{
   )
 }
 
+const LoadingRow: React.FC<{ rowIndex: number }> = ({ rowIndex }) => (
+  <div className="relative overflow-hidden w-full">
+    <div className="flex gap-4">
+      {Array.from({ length: 8 }, (_, index) => (
+        <div
+          key={`loading-${rowIndex}-${index}`}
+          className="flex-shrink-0 bg-card-dark py-3 px-3 lg:px-4 rounded-xl border border-gray-700/30 animate-pulse"
+        >
+          <div className="flex items-start gap-2 sm:gap-3 w-full">
+            <div className="mr-2 lg:mr-3 w-10 h-10 lg:w-14 lg:h-14 rounded-full bg-gray-600" />
+            <div className="flex-1 min-w-0 space-y-2">
+              <div className="h-4 bg-gray-600 rounded w-3/4" />
+              <div className="h-3 bg-gray-600 rounded w-1/2" />
+              <div className="h-3 bg-gray-600 rounded w-2/3" />
+            </div>
+            <div className="w-12 h-16 sm:w-16 sm:h-20 lg:w-20 lg:h-24 bg-gray-600 rounded-lg" />
+            <div className="flex flex-col gap-2 h-16 sm:h-20 lg:h-24">
+              <div className="flex-1 w-16 bg-gray-600 rounded" />
+              <div className="flex-1 w-16 bg-gray-600 rounded" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)
+
+const ErrorRow: React.FC<{ rowIndex: number }> = ({ rowIndex }) => (
+  <div className="relative overflow-hidden w-full">
+    <div className="flex gap-4">
+      {Array.from({ length: 8 }, (_, index) => (
+        <div
+          key={`error-${rowIndex}-${index}`}
+          className="flex-shrink-0 bg-card-dark py-3 px-3 lg:px-4 rounded-xl border border-gray-700/30"
+        >
+          <div className="flex items-center justify-center h-20 text-gray-400 text-sm">
+            Player data unavailable
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+)
+
 const Players: React.FC = () => {
-  const playerRows = useMemo(
-    () => [
-      generateMockPlayers(8),
-      generateMockPlayers(8),
-      generateMockPlayers(8),
-      generateMockPlayers(8),
-    ],
-    []
-  )
+  const { data: players, isLoading, error } = usePlayersQuery()
+
+  // first 32 players into 4 rows of 8
+  const playerRows = useMemo(() => {
+    if (!players || players.length === 0) return []
+
+    const first32Players = players.slice(0, 32)
+    const rows: PlayerCardProps['player'][][] = []
+
+    for (let i = 0; i < 4; i++) {
+      const startIndex = i * 8
+      const endIndex = startIndex + 8
+      const rowPlayers = first32Players.slice(startIndex, endIndex)
+
+      // Fill empty slots with duplicates if needed
+      while (rowPlayers.length < 8 && first32Players.length > 0) {
+        const fillIndex = rowPlayers.length % first32Players.length
+        rowPlayers.push(first32Players[fillIndex])
+      }
+
+      rows.push(rowPlayers)
+    }
+
+    return rows
+  }, [players])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -148,13 +161,57 @@ const Players: React.FC = () => {
     },
   }
 
+  const renderRows = () => {
+    if (isLoading) {
+      return Array.from({ length: 4 }, (_, rowIndex) => (
+        <motion.div
+          key={`loading-row-${rowIndex}`}
+          variants={rowVariants}
+          className="w-full"
+        >
+          <LoadingRow rowIndex={rowIndex} />
+        </motion.div>
+      ))
+    }
+
+    if (error || !players || players.length === 0) {
+      return Array.from({ length: 4 }, (_, rowIndex) => (
+        <motion.div
+          key={`error-row-${rowIndex}`}
+          variants={rowVariants}
+          className="w-full"
+        >
+          <ErrorRow rowIndex={rowIndex} />
+        </motion.div>
+      ))
+    }
+
+    return playerRows.map((rowPlayers, rowIndex) => (
+      <motion.div
+        key={`row-${rowIndex}`}
+        variants={rowVariants}
+        className="w-full"
+      >
+        <InfiniteScrollRow
+          players={rowPlayers}
+          direction={rowIndex % 2 === 0 ? 'left' : 'right'}
+          speed={30 + rowIndex * 5}
+          rowIndex={rowIndex}
+          highlightIndex={[
+            Math.floor(Math.random() * 8),
+            Math.floor(Math.random() * 8),
+          ]}
+        />
+      </motion.div>
+    ))
+  }
+
   return (
     <section
       className="relative pb-24 bg-dark-navy overflow-hidden"
       aria-labelledby="players-section-title"
     >
       <div className="mx-auto">
-        {/* Screen reader title */}
         <h2 id="players-section-title" className="sr-only">
           Player Projections - Browse available player statistics for betting
         </h2>
@@ -164,30 +221,13 @@ const Players: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="space-y-6 sm:space-y-8 lg:space-y-10"
+          className="space-y-4 sm:space-y-6 lg:space-y-8"
         >
-          {playerRows.map((players, rowIndex) => (
-            <motion.div
-              key={`row-${rowIndex}`}
-              variants={rowVariants}
-              className="w-full"
-            >
-              <InfiniteScrollRow
-                players={players}
-                direction={rowIndex % 2 === 0 ? 'left' : 'right'}
-                speed={30 + rowIndex * 5}
-                rowIndex={rowIndex}
-                highlightIndex={[
-                  Math.floor(Math.random() * 8),
-                  Math.floor(Math.random() * 8),
-                ]}
-              />
-            </motion.div>
-          ))}
+          {renderRows()}
         </motion.div>
       </div>
 
-      {/* edge fade */}
+      {/* Edge fade */}
       <div className="absolute inset-y-0 left-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-r from-dark-navy to-transparent pointer-events-none z-10" />
       <div className="absolute inset-y-0 right-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-l from-dark-navy to-transparent pointer-events-none z-10" />
     </section>
