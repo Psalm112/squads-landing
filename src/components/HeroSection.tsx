@@ -2,12 +2,12 @@
 
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
-import { FloatingElements } from '@/components/FloatingElements'
+import { FloatingElements } from '@/components/ui/FloatingElements'
 import Image from 'next/image'
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[90vh] overflow-hidden">
+    <section className="relative h-[90vh] overflow-hidden">
       {/* Background Elements */}
       <FloatingElements />
 
@@ -114,8 +114,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Wave Bottom */}
-      <div className="absolute bottom-0 left-0 right-0"></div>
+      {/* <div className="absolute bottom-0 left-0 right-0"></div> */}
     </section>
   )
 }

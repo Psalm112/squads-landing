@@ -10,7 +10,6 @@ export function useOptimizedScroll() {
       setScrollY(window.scrollY)
       setIsScrolling(true)
 
-      // Reset scrolling state after a delay
       setTimeout(() => setIsScrolling(false), 150)
     }, 16),
     []

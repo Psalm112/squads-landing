@@ -138,7 +138,7 @@ export function Footer() {
       >
         {/* Mobile Layout  */}
         <div className="flex flex-col space-y-4 lg:hidden">
-          {/* Box 1: Main Content - Logo, Text, Contact */}
+          {/* Main Content */}
           <motion.div
             variants={itemVariants}
             className="border-2 border-[#2A343F] rounded-2xl p-4 xs:p-6"
@@ -169,7 +169,7 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Box 2: Navigation Links + Social Icons */}
+          {/* Navigation Links + Social Icons */}
           <motion.div
             variants={itemVariants}
             className="border-2 border-[#2A343F] rounded-2xl p-4 xs:p-6"
@@ -212,7 +212,7 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Box 3: Copyright */}
+          {/* Copyright */}
           <motion.div
             variants={itemVariants}
             className="border-2 border-[#2A343F] rounded-2xl p-4 xs:p-6"
@@ -225,7 +225,7 @@ export function Footer() {
 
         {/* Desktop Layout */}
         <div className="hidden lg:flex lg:gap-x-4 2xl:gap-x-6">
-          {/* Left Box: Main Content */}
+          {/* Main Content */}
           <motion.div
             variants={itemVariants}
             className="flex-1 border-2 border-[#2A343F] rounded-3xl p-8"
@@ -256,7 +256,6 @@ export function Footer() {
             </div>
           </motion.div>
 
-          {/* Right Column  */}
           <div className="flex-1 flex flex-col space-y-6 w-full">
             {/*Navigation + Social */}
             <motion.div
@@ -301,7 +300,7 @@ export function Footer() {
               </div>
             </motion.div>
 
-            {/* Bottom Right Box: Copyright */}
+            {/* Copyright */}
             <motion.div
               variants={itemVariants}
               className="border-2 border-[#2A343F] rounded-3xl p-6"

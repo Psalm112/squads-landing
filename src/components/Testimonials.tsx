@@ -1,9 +1,7 @@
-// src/components/Testimonials.tsx
 import React from 'react'
 import AnimatedArrow from '@/components/Feature/AnimatedArrow'
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { useMediaQuery } from '@/hooks/useMediaQuery'
 import {
   TestimonialCard,
   StatsCard,
@@ -203,7 +201,6 @@ function Testimonials() {
         </h2>
       </motion.div>
 
-      {/* Horizontal Scrolling Container */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -354,7 +351,7 @@ function Testimonials() {
           </motion.div>
         </div>
 
-        {/* Gradient Overlays for Visual Effect */}
+        {/* edge fade */}
         <div className="absolute top-0 left-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-r from-dark-navy to-transparent pointer-events-none z-10" />
         <div className="absolute top-0 right-0 w-8 sm:w-12 lg:w-16 h-full bg-gradient-to-l from-dark-navy to-transparent pointer-events-none z-10" />
       </motion.div>

@@ -11,7 +11,19 @@ import Testimonials from '@/components/Testimonials'
 import Blog from '@/components/Blog'
 import Community from '@/components/Community'
 import CallToAction from '@/components/CallToAction'
+import { useMediaQuery } from '@/hooks/useMediaQuery'
+
 export default function HomePage() {
+  const isXL = useMediaQuery('(min-width: 1280px)')
+  const isLG = useMediaQuery('(min-width: 1024px)')
+  const isMD = useMediaQuery('(min-width: 768px)')
+  const isSM = useMediaQuery('(min-width: 380px)')
+
+  let svgCount = 1
+  if (isSM) svgCount = 2
+  if (isMD) svgCount = 3
+  if (isLG) svgCount = 4
+  if (isXL) svgCount = 5
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -24,18 +36,8 @@ export default function HomePage() {
         <div className="bg-[url('/assets/bg1.png')] bg-cover">
           <HeroSection />
 
-          <div className="relative flex rotate-[180deg] h-[60px] xs:h-[80px] translate-y-[3.8px] ">
-            {Array(
-              window.innerWidth > 1280
-                ? 5
-                : window.innerWidth > 1024
-                  ? 4
-                  : window.innerWidth > 768
-                    ? 3
-                    : window.innerWidth > 380
-                      ? 2
-                      : 1
-            )
+          <div className="relative flex rotate-[180deg] h-[60px] xs:h-[80px] translate-y-[2.5px] xs:translate-y-[3.5px] ">
+            {Array(svgCount)
               .fill(null)
               .map((_, index) => (
                 <svg

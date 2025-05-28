@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAppStore } from '@/store/useAppStore'
 import { Button } from '@/components/ui/Button'
 
 import {
@@ -30,7 +29,7 @@ const socialLinks = [
 ]
 
 export function Header() {
-  const { isMobileMenuOpen, toggleMobileMenu } = useAppStore()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -47,7 +46,11 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-dark-navy/95 backdrop-blur-md' : 'bg-transparent'
+        isScrolled
+          ? 'bg-dark-navy/95 backdrop-blur-md'
+          : isMobileMenuOpen
+            ? 'bg-dark-navy/95 backdrop-blur-md'
+            : 'bg-transparent'
       }`}
     >
       <nav className="mx-auto px-4 sm:px-6 lg:px-20" aria-label="Top">
@@ -94,12 +97,12 @@ export function Header() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu */}
           <div className="lg:hidden ml-auto">
             <Button
               variant="ghost"
               size="sm"
-              onClick={toggleMobileMenu}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
               className="text-white"
             >
@@ -132,7 +135,7 @@ export function Header() {
                         ? 'text-light-green'
                         : 'hover:text-light-green'
                     }`}
-                    onClick={toggleMobileMenu}
+                    // onClick={()-}
                   >
                     {item.name}
                   </Link>

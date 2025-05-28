@@ -1,9 +1,9 @@
 export const SITE_CONFIG = {
   name: 'Squads',
   description: 'The New Way to Win Money on Sports',
-  url: 'https://squads.game',
+  url: 'https://squads-landing.vercel.app',
   ogImage: '/og-image.png',
-  creator: '@squads',
+  creator: 'Samuel Oyeuga - github.com/Psalm112',
 }
 
 export const NAVIGATION_ITEMS = [
@@ -13,9 +13,9 @@ export const NAVIGATION_ITEMS = [
   { name: 'FAQs', href: '/faqs' },
 ]
 
-export const SOCIAL_LINKS = [
-  { name: 'Twitter', href: '#', icon: 'TwitterIcon' },
-  { name: 'TikTok', href: '#', icon: 'TikTokIcon' },
-  { name: 'YouTube', href: '#', icon: 'YoutubeIcon' },
-  { name: 'Instagram', href: '#', icon: 'InstagramIcon' },
-]
+// export const SOCIAL_LINKS = [
+//   { name: 'Twitter', href: '#', icon: 'TwitterIcon' },
+//   { name: 'TikTok', href: '#', icon: 'TikTokIcon' },
+//   { name: 'YouTube', href: '#', icon: 'YoutubeIcon' },
+//   { name: 'Instagram', href: '#', icon: 'InstagramIcon' },
+// ]

@@ -181,7 +181,6 @@ export default function Features() {
             <div className="w-full h-full relative">
               {/* Mobile Layout */}
               <div className={`${layoutBreak ? 'block' : 'hidden'}`}>
-                {/* Instruction */}
                 <motion.div
                   variants={itemVariants}
                   className="text-center px-4 relative mb-6"
@@ -190,7 +189,7 @@ export default function Features() {
                     Pick more or less on your favourite players stats
                   </p>
 
-                  {/* Curved Arrow */}
+                  {/* Arrow */}
                   <AnimatedArrow
                     className="absolute top-15 right-[22%] md:right-[30%] "
                     pathData="M32.1095 2.01164C164.216 120.797 136.791 345.011 29.9283 336.957C-21.54 333.078 7.30394 250.072 55.9628 284.497C115.483 326.606 29.4788 355.726 27.4649 439.827M27.4649 439.827L20.053 426.701M27.4649 439.827L42.8678 426.193"
@@ -286,14 +285,14 @@ export default function Features() {
               <div
                 className={`${layoutBreak ? 'hidden' : 'flex'} items-start gap-8`}
               >
-                {/* Left Side - Player Cards */}
+                {/*  Player Cards */}
                 <div className="flex-[2]">
                   <motion.div variants={itemVariants} className="relative mb-8">
                     <p className="text-2xl font-cursive font-black text-dark-navy -rotate-1 text-center max-w-xs mx-auto">
                       Pick more or less on your favourite players stats
                     </p>
 
-                    {/* Curved Arrow */}
+                    {/* Arrow */}
                     <AnimatedArrow
                       className="absolute top-8 -right-40 w-60"
                       pathData="M1.37004 19.1816C94.6528 -26.8737 215.956 29.2278 190.256 82.9448C177.879 108.817 136.67 78.3885 165.757 59.6807C201.336 36.7969 239.06 92.7226 237.043 126.088M237.043 126.088L226.48 117.972M237.043 126.088L246.785 119.199"
@@ -326,9 +325,8 @@ export default function Features() {
                   </div>
                 </div>
 
-                {/* Right Side - Payout & Withdraw */}
+                {/* Payout & Withdraw */}
                 <div className="flex-[1] space-y-12 translate-y-[15%] -translate-x-[10%]">
-                  {/* Multiplier Section */}
                   <motion.div variants={itemVariants} className="relative">
                     <div className="text-center mb-6 ">
                       <div className="flex flex-col items-end">
@@ -386,7 +384,7 @@ export default function Features() {
                       <WithdrawCard variants={itemVariants} />
                     </div>
 
-                    {/* Final curved arrow */}
+                    {/*  arrow to player cards */}
                     <AnimatedArrow
                       className="absolute bottom-[30%] -left-[90%]"
                       pathData="M188.233 84.8366C83.3599 59.6039 15.4684 74.4691 32.7633 102.73C43.7124 120.621 91.6394 84.5661 39.6628 48.5943C3.6012 23.6369 15.7444 -4.01267 15.7444 3.17483M15.7444 3.17483L26.7837 16.9387M15.7444 3.17483L1.94531 21.9851"

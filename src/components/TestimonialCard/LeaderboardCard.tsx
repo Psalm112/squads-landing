@@ -146,7 +146,7 @@ const LeaderboardCard: React.FC<LeaderboardCardProps> = ({
         <Logo className="w-24 lg:w-32" />
       </div>
 
-      {/* Shine Effect - Fixed to work with group class */}
+      {/* Shine */}
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -skew-x-12 translate-x-full group-hover:translate-x-[-200%] transition-transform duration-700" />
       </div>

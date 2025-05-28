@@ -27,16 +27,16 @@ export const metadata: Metadata = {
     'Just pick More or Less on player stats and win up to 100X your cash! The simplest way to make money from sports betting.',
   keywords:
     'sports betting, fantasy sports, win money, player stats, football betting',
-  authors: [{ name: 'Squads Team' }],
-  creator: 'Squads',
-  publisher: 'Squads',
+  authors: [{ name: 'Samuel Oyeuga' }],
+  creator: 'Samuel Oyeuga',
+  publisher: 'Samuel Oyeuga',
   robots: 'index, follow',
   viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#00FF7F',
+  themeColor: '#1A222C',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://squads.game',
+    url: 'https://squads-landing.vercel.app',
     title: 'Squads - The New Way to Win Money on Sports',
     description:
       'Just pick More or Less on player stats and win up to 100X your cash!',

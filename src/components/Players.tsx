@@ -61,7 +61,7 @@ const InfiniteScrollRow: React.FC<{
   rowIndex: number
   highlightIndex?: number[]
 }> = ({ players, direction, speed, rowIndex, highlightIndex }) => {
-  // Duplicate players for seamless infinite scroll
+  // Duplicated players for seamless infinite scroll
   const duplicatedPlayers = useMemo(() => [...players, ...players], [players])
 
   const cardVariants = {
@@ -96,9 +96,6 @@ const InfiniteScrollRow: React.FC<{
             ease: 'linear',
           },
         }}
-        // style={{
-        //   width: `${duplicatedPlayers.length * 320}px`, // Approximate card width including gap
-        // }}
       >
         {duplicatedPlayers.map((player, index) => (
           <div key={`${player.id}-${index}`} className="flex-shrink-0">
@@ -190,7 +187,7 @@ const Players: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Gradient overlays for smooth edge fade effect */}
+      {/* edge fade */}
       <div className="absolute inset-y-0 left-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-r from-dark-navy to-transparent pointer-events-none z-10" />
       <div className="absolute inset-y-0 right-0 w-16 sm:w-24 lg:w-32 bg-gradient-to-l from-dark-navy to-transparent pointer-events-none z-10" />
     </section>
