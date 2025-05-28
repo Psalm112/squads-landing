@@ -3,7 +3,7 @@ export const SITE_CONFIG = {
   description: 'The New Way to Win Money on Sports',
   url: 'https://squads-landing.vercel.app',
   ogImage: '/og-image.png',
-  creator: 'Samuel Oyeuga - github.com/Psalm112',
+  creator: 'Samuel Oyenuga - github.com/Psalm112',
 }
 
 export const NAVIGATION_ITEMS = [

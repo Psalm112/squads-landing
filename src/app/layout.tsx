@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     'Just pick More or Less on player stats and win up to 100X your cash! The simplest way to make money from sports betting.',
   keywords:
     'sports betting, fantasy sports, win money, player stats, football betting',
-  authors: [{ name: 'Samuel Oyeuga' }],
-  creator: 'Samuel Oyeuga',
-  publisher: 'Samuel Oyeuga',
+  authors: [{ name: 'Samuel Oyenuga' }],
+  creator: 'Samuel Oyenuga',
+  publisher: 'Samuel Oyenuga',
   robots: 'index, follow',
   openGraph: {
     type: 'website',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     description:
       'Just pick More or Less on player stats and win up to 100X your cash!',
     images: ['https://squads-landing.vercel.app/og-image.png'],
-    creator: '@samueloyeuga',
+    creator: '@samueloyenuga',
   },
   icons: {
     icon: '/favicon.ico',
