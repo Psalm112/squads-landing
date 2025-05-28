@@ -12,12 +12,24 @@ import Blog from '@/components/Blog'
 import Community from '@/components/Community'
 import CallToAction from '@/components/CallToAction'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
+import Loading from './loading'
+import { useEffect, useState } from 'react'
 
 export default function HomePage() {
   const isXL = useMediaQuery('(min-width: 1280px)')
   const isLG = useMediaQuery('(min-width: 1024px)')
   const isMD = useMediaQuery('(min-width: 768px)')
   const isSM = useMediaQuery('(min-width: 380px)')
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000)
+    return () => clearTimeout(timer)
+  }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   let svgCount = 1
   if (isSM) svgCount = 2

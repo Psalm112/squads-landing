@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   robots: 'index, follow',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_GB',
     url: 'https://squads-landing.vercel.app',
     title: 'Squads - The New Way to Win Money on Sports',
     description:
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     siteName: 'Squads',
     images: [
       {
-        url: '/og-image.png',
+        url: 'https://squads-landing.vercel.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Squads - Win Money on Sports',
@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     title: 'Squads - The New Way to Win Money on Sports',
     description:
       'Just pick More or Less on player stats and win up to 100X your cash!',
-    images: ['/og-image.png'],
-    creator: '@squads',
+    images: ['https://squads-landing.vercel.app/og-image.png'],
+    creator: '@samueloyeuga',
   },
   icons: {
     icon: '/favicon.ico',
@@ -88,6 +88,9 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta name="twitter:image:alt" content="Squads - Win Money on Sports" />
       </head>
       <body
         className={`${inter.className} bg-dark-navy antialiased text-text-primary`}
