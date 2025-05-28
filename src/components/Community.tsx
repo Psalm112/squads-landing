@@ -68,10 +68,10 @@ const Community: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="bg-[#1F2935] border-2 border-[#232D39] rounded-xl w-full lg:w-[340px] lg:flex-shrink-0"
               >
-                <div className="bg-[url('/assets/card1bg.png')] bg-cover bg-center p-4 sm:p-6 flex flex-col h-full w-full">
+                <div className="bg-[url('/assets/community/card1bg.png')] bg-cover bg-center p-4 sm:p-6 flex flex-col h-full w-full">
                   <div className="relative w-[80px] sm:w-[100px] h-[80px] sm:h-[100px] mb-4 sm:mb-6 ">
                     <Image
-                      src="/assets/register.svg"
+                      src="/assets/community/register.svg"
                       alt="Register"
                       fill
                       className="object-contain"
@@ -101,10 +101,10 @@ const Community: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="bg-[#1F2935] border border-[#232D39] rounded-xl flex-1"
               >
-                <div className="bg-[url('/assets/card2bg.png')] bg-cover bg-center lg:pl-0 pb-[0_!important] h-full w-full p-4 sm:p-6 flex max-lg:flex-col-reverse sm:items-center gap-4 sm:gap-6">
+                <div className="bg-[url('/assets/community/card2bg.png')] bg-cover bg-center lg:pl-0 pb-[0_!important] h-full w-full p-4 sm:p-6 flex max-lg:flex-col-reverse sm:items-center gap-4 sm:gap-6">
                   <div className="relative w-full w-full lg:w-[200px] h-[290px] sm:h-[360px] md:h-[460px] lg:h-full flex-shrink-0">
                     <Image
-                      src={`/assets/fundAccount${isLG ? '' : 'sm'}.svg`}
+                      src={`/assets/community/fundAccount${isLG ? '' : 'sm'}.svg`}
                       alt="Fund Account"
                       fill
                       className="lg:object-contain object-top object-cover lg:object-left"
@@ -137,10 +137,10 @@ const Community: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="bg-[#1F2935] border border-[#232D39] rounded-xl flex-1"
               >
-                <div className="bg-[url('/assets/card3bg.png')] bg-cover bg-center p-4 sm:p-6 lg:pl-0 flex flex-col items-start gap-4 sm:gap-6 h-full w-full">
+                <div className="bg-[url('/assets/community/card3bg.png')] bg-cover bg-center p-4 sm:p-6 lg:pl-0 flex flex-col items-start gap-4 sm:gap-6 h-full w-full">
                   <div className="relative w-full h-[120px] sm:h-[160px] flex-shrink-0 overflow-hidden">
                     <Image
-                      src="/assets/playerEntry.svg"
+                      src="/assets/community/playerEntry.svg"
                       alt="Create Your Entry"
                       fill
                       className="object-contain object-left translate-x-0 lg:-translate-x-[7%] px-4 sm:px-6 lg:px-0"
@@ -170,7 +170,7 @@ const Community: React.FC = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="bg-[#1F2935] border border-[#232D39] rounded-xl w-full lg:w-[340px] lg:flex-shrink-0"
               >
-                <div className="bg-[url('/assets/card1bg.png')] bg-cover bg-center p-4 sm:p-6 pb-[0_!important] flex flex-col h-full w-full">
+                <div className="bg-[url('/assets/community/card1bg.png')] bg-cover bg-center p-4 sm:p-6 pb-[0_!important] flex flex-col h-full w-full">
                   <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                     <span className="inline-block bg-[#2F3843] text-center text-xs sm:text-sm font-medium px-2 sm:px-1 py-1.5 sm:py-2 rounded w-[70px] sm:w-[84px]">
                       Cash Out
@@ -185,21 +185,21 @@ const Community: React.FC = () => {
                   </div>
                   <div className="relative w-full h-[100px] sm:h-[120px] mt-auto">
                     <Image
-                      src="/assets/cashOut1.svg"
+                      src="/assets/community/cashOut1.svg"
                       alt="Withdraw Winnings"
                       fill
                       className="z-10 object-contain -translate-x-[10%]"
                       sizes="(max-width: 1024px) 100vw, 340px"
                     />
                     <Image
-                      src="/assets/cashOut2.svg"
+                      src="/assets/community/cashOut2.svg"
                       alt="Withdraw Winnings"
                       fill
                       className="z-20 object-contain"
                       sizes="(max-width: 1024px) 100vw, 340px"
                     />
                     <Image
-                      src="/assets/cashOut3.svg"
+                      src="/assets/community/cashOut3.svg"
                       alt="Withdraw Winnings"
                       fill
                       className=" object-contain"

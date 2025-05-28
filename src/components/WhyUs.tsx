@@ -41,7 +41,7 @@ const features: FeatureCard[] = [
         />
       </span>
     ),
-    icon: '/assets/numerousOpp.svg',
+    icon: '/assets/whyus/numerousOpp.svg',
     cardStyle: {
       bgColor: 'bg-gradient-to-b from-[#232D39] to-[#000000]',
       textColor: 'text-[#FAFEFA]',
@@ -57,7 +57,7 @@ const features: FeatureCard[] = [
     },
     description:
       "Say goodbye to waiting! With Squads, you can cash out your funds instantly—any time, any day. Whether it's a weekend or midnight, your money is just a tap away.🚀",
-    icon: '/assets/instantCashout.svg',
+    icon: '/assets/whyus/instantCashout.svg',
     cardStyle: {
       bgColor: 'bg-gradient-to-br from-[#104333] to-[#28A981]',
       textColor: 'text-text-primary',
@@ -74,7 +74,7 @@ const features: FeatureCard[] = [
     },
     description:
       "Don't let slow transactions hold you back. With Squads, you can deposit funds instantly and stay in the game. Your winning streak starts here!🚀",
-    icon: '/assets/fastDeposit.svg',
+    icon: '/assets/whyus/fastDeposit.svg',
     cardStyle: {
       bgColor: 'bg-white',
       textColor: 'text-[#20262E]',
@@ -96,7 +96,7 @@ const features: FeatureCard[] = [
         referral link🤑
       </span>
     ),
-    icon: '/assets/bonusesRewards.svg',
+    icon: '/assets/whyus/bonusesRewards.svg',
     cardStyle: {
       bgColor: 'bg-gradient-to-b from-[#FFC2F7] to-[#FFFBFD]',
       textColor: 'text-[#353E49]',
