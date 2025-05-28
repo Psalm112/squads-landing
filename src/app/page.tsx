@@ -33,7 +33,7 @@ export default function HomePage() {
     >
       <Header />
       <main>
-        <div className="bg-[url('/assets/bg1.png')] bg-cover">
+        <div className="bg-[url('/assets/bg1.png')] bg-cover bg-center">
           <HeroSection />
 
           <div className="relative flex rotate-[180deg] h-[60px] xs:h-[80px] translate-y-[2.5px] xs:translate-y-[3.5px] ">

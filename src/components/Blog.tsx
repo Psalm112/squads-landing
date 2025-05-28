@@ -81,7 +81,7 @@ const cardHoverVariants = {
 
 function Blog() {
   return (
-    <section className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+    <section className="max-w-7xl mx-auto py-20 px-4 sm:px-6 lg:px-8">
       {/* Header */}
       <motion.div
         className="text-center flex flex-col gap-y-3 mb-8 sm:mb-12"
@@ -90,7 +90,7 @@ function Blog() {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-white text-2xl sm:text-3xl lg:text-5xl font-bold leading-tight">
+        <h2 className="text-white text-3xl lg:text-5xl max-sm:max-w-[60vw] mx-auto font-bold leading-tight">
           Latest from the&nbsp;
           <span className="font-cursive text-light-green">Gang</span>
         </h2>
@@ -167,7 +167,7 @@ function Blog() {
         <Button
           variant="secondary"
           size="lg"
-          className="bg-light-green hover:bg-light-green/90 text-dark-navy font-semibold px-8 py-3 rounded-md transition-all duration-300 hover:scale-105 focus:scale-105 focus:ring-2 focus:ring-light-green/50 focus:ring-offset-2 focus:ring-offset-dark-purple"
+          className="bg-light-green hover:bg-light-green/90 text-[#2A343F] font-semibold px-8 py-3 rounded-md transition-all duration-300 hover:scale-105 focus:scale-105 focus:ring-2 focus:ring-light-green/50 focus:ring-offset-2 focus:ring-offset-dark-purple"
           aria-label="Read more blog posts"
         >
           Read more on blog
